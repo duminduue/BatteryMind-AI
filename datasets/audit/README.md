@@ -270,3 +270,35 @@ The supplied daily aggregation of regular discharge records (`mode=-1.0`, `missi
 The dataset documentation lists pack 5.3 among two-stage recommissioned packs with nominal sequence 14.3 A → 16 A. The supplied measurements broadly support a change from the lower-current regime (about 14.7–15.1 A measured) to the higher-current regime (about 16.7–16.9 A measured), consistent with the documented direction of change. The measured daily medians are not identical to nominal protocol values and should be reported separately.
 
 The supplied daily summary has no listed regular-discharge dates between 5 and 18 November 2022. This is a gap in the supplied filtered dates, not evidence that the pack was inactive throughout the interval. The summary does not establish the exact transition time, capacity trigger, SOH, or EOL labels. Session-level and experiment-log checks remain necessary.
+
+
+## Recommissioned group: consolidated pack-level comparison
+
+The eight actual CSV filenames in the recommissioned folder encode pack IDs with the decimal point omitted (for example, `battery03.csv` represents pack 0.3). The table below combines the official protocol descriptions supplied in the dataset README with the daily measured-current summaries inspected locally. Nominal currents are protocol values; observed currents are daily medians from regular discharge rows only (`mode=-1.0`, `mission_type=1.0`).
+
+| CSV file | Pack ID | Documented nominal sequence (A) | Observed measured-current regimes (A, approximate daily medians) | Initial interpretation / caveat |
+|---|---:|---:|---|---|
+| `battery03.csv` | 0.3 | 16 → 14.3 → 7.5 | 16.3–16.7 → 15.0 → 7.4–7.6 | Three regimes broadly correspond; 20 Feb is a mixed/session-transition day. |
+| `battery02.csv` | 0.2 | 16 → 12.9 | 16.3–16.5 → 13.5–13.7 | Two regimes broadly correspond; measured lower stage is above nominal. |
+| `battery12.csv` | 1.2 | 16 → 9.3 | 16.3–16.5 → 9.5–9.9 | Two regimes broadly correspond; 30 Nov combines both regimes. |
+| `battery33.csv` | 3.3 | 16 → 12.9 | 16.3–16.6 → 13.5–13.9 | Two regimes broadly correspond; measured lower stage is above nominal. |
+| `battery32.csv` | 3.2 | 16 → 14.3 | 16.3–16.7 → 14.8–15.3 | Two regimes broadly correspond; measured lower stage is above nominal. |
+| `battery24.csv` | 2.4 | 16 → 9.3 | 16.3–16.6 and 9.5–9.7 | Alternating daily regimes were observed around 13–15 Nov; do not force a monotonic transition interpretation. |
+| `battery25.csv` | 2.5 | 16 → 7.5 → 14.3 | 16.2–16.4 → 7.0–7.4 → 15.0 | Three regimes broadly correspond; 1–2 Mar are mixed/transition days. |
+| `battery53.csv` | 5.3 | 14.3 → 16 | 14.7–15.1 → 16.7–16.9 | Direction of two-stage change broadly corresponds; discharge-date gap 5–18 Nov. |
+
+### Interpretation boundaries
+
+- This comparison is a screening summary based on the daily outputs supplied in this audit, not a full re-computation of all CSVs or a validation of the experiment protocol.
+- Measured current medians are not the same as nominal protocol currents. Do not replace one with the other or treat the differences as errors without investigating sensor calibration, load control, and measurement context.
+- Daily means can be misleading on mixed days; medians and session-level summaries are more informative for identifying multiple regimes.
+- Missing dates in these filtered daily summaries mean no qualifying regular-discharge rows were shown for those dates. They do not prove that a pack was inactive.
+- The pack IDs above correct any ambiguity between filenames and pack labels: `battery03.csv` is pack 0.3, `battery02.csv` is pack 0.2, and so on. In particular, `battery03.csv` is the documented three-stage pack 0.3 (16 → 14.3 → 7.5 A), not pack 3.2.
+- These current-regime observations do not establish capacity-fade labels, SOH ground truth, exact recommissioning thresholds, or EOL/RUL target validity.
+
+### Recommended next audit actions
+
+1. Complete the regular-pack and second-life pack daily protocol audits.
+2. Inspect capacity/failure definitions and determine whether capacity reference measurements are available in the archives.
+3. Audit second-life lineage and design pack-level splits that keep related first-life and second-life records together.
+4. Only after these checks, decide which supervised tasks (SOH, RUL, or another prognostic target) are defensible.
