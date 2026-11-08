@@ -489,3 +489,18 @@ The local daily aggregation of regular discharge records (`mode` equal to `-1` o
 The dataset documentation lists regular pack 4.1 as a variable-current pack with an approximate average current of 14.3 A and current segments held for 40, 60, or 80 seconds with randomly selected amplitudes and segment lengths. The daily medians (approximately 13.99–16.25 A) are not a direct test of the documented segment-level variable-current protocol. Do not interpret the daily median range as a contradiction of the approximate average protocol without calculating segment-level and lifetime-level current statistics.
 
 This is a daily-summary audit of qualifying regular-discharge records only. The output does not establish capacity fade, SOH ground truth, failure/EOL labels, or RUL target validity.
+
+
+### Twenty-second measurement-level inspection: regular battery51.csv (pack 5.1)
+
+The local daily aggregation of regular discharge records (`mode` equal to `-1` or `-1.0`, `mission_type=1.0`, non-empty `current_load`) for `regular_alt_batteries/battery51.csv` produced:
+
+- 26 represented discharge dates.
+- Date range: 7 August 2022 to 4 September 2022.
+- Daily median current range: approximately 13.876–15.439 A.
+- First three represented dates: 7 August (9,284 samples; median 14.540 A), 8 August (5,308; 14.525 A), and 9 August (6,633; 14.601 A).
+- Last three represented dates: 2 September (6,258; 15.324 A), 3 September (1,866; 15.335 A), and 4 September (170; 13.876 A).
+
+The dataset documentation lists regular pack 5.1 as a variable-current pack with an approximate average current of 14.3 A and variable segments held for 40, 60, or 80 seconds. Daily medians are not a direct test of this segment-level protocol. In particular, the final represented date has only 170 qualifying samples, so its median should be interpreted with that low sample count in mind. Segment-level and lifetime-level current analysis is needed before assessing agreement with the documented approximate average.
+
+This is a daily-summary audit of qualifying regular-discharge records only. The output does not establish capacity fade, SOH ground truth, failure/EOL labels, or RUL target validity.
