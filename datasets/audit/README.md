@@ -600,3 +600,23 @@ This pattern is more consistent with a slowly varying current level over the ins
 The raw-current plot for the detected interval 10151.363–10230.688 s (estimated duration 80.279 s) shows a visibly different pattern from the inspected Pack 5.0 interval. Pack 4.0 has a step up from roughly 17.6 A to roughly 18.3 A near the detected start, remains approximately level through the shaded interval, and steps down to roughly 16.7 A near the detected end. A later step up to roughly 19 A is also visible near the end of the plotted window.
 
 This visual example is consistent with the detected interval corresponding to a distinct, approximately stable measured-current plateau bounded by changes in current. It provides useful positive contrast to the Pack 5.0 example, where the detected intervals did not align with clear separate transitions. This is a visual spot-check only; precise transition timing, tolerance sensitivity, and representativeness across all packs remain to be quantified.
+
+
+### Time-binned validation of the Pack 4.0 detected ~80 s plateau (2022-07-22)
+
+The 20-second-bin median current summary around the detected interval 10151.363–10230.688 s showed:
+
+- 10111–10131 s: 17.6475 A
+- 10131–10151 s: 17.6414 A
+- 10151–10171 s: 18.3184 A
+- 10171–10191 s: 18.3125 A
+- 10191–10211 s: 18.3102 A
+- 10211–10231 s: 18.3143 A
+- 10231–10251 s: 16.6960 A
+- 10251–10271 s: 16.6914 A
+- 10271–10291 s: 16.6920 A
+- 10291–10311 s: 16.6934 A
+- 10311–10331 s: 19.1134 A
+- 10331–10351 s: 19.1226 A
+
+Most bins contained 21 samples; the first partial bin contained 2. The bin medians support a clear step from approximately 17.64 A to 18.31 A at the detected start, followed by a step down to approximately 16.69 A near the detected end. A later step to approximately 19.12 A is also visible. This numerically supports the visual interpretation that this selected Pack 4.0 detection corresponds to a distinct, approximately stable measured-current plateau. Bin aggregation limits transition-time precision; this remains a spot-check rather than validation of every detected segment.
