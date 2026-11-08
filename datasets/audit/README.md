@@ -220,3 +220,18 @@ The supplied daily aggregation of regular discharge records (`mode=-1.0`, `missi
 The dataset documentation lists pack 3.2 among the two-stage recommissioned packs with nominal sequence 16 A → 14.3 A. The observed daily pattern broadly supports a shift from a higher-current regime to a lower-current regime, although the lower-stage measured medians are approximately 14.8–15.3 A rather than exactly 14.3 A. Nominal protocol values and measured current statistics must remain distinct.
 
 The supplied output ends on 14 November 2022; it does not establish the pack's final discharge date or full lifetime. The 26 October daily median suggests a mixed/transition day but does not identify the exact transition time or capacity trigger. This daily summary does not establish SOH or EOL labels.
+
+
+### Seventh measurement-level inspection: recommissioned battery24.csv
+
+The supplied daily aggregation of regular discharge records (`mode=-1.0`, `mission_type=1.0`, non-empty `current_load`) for `recommissioned_batteries/battery24.csv` shows:
+
+- 4–12 November 2022 (dates represented): daily median current approximately 16.300–16.578 A.
+- 13 November: median 9.740 A.
+- 14 November: median 16.578 A.
+- 15 November: median 9.760 A.
+- 16 November–18 January 2023 (dates represented): daily median current approximately 9.553–9.708 A.
+
+The dataset documentation lists pack 2.4 among the two-stage recommissioned packs with nominal current sequence 16 A → 9.30 A. Most of the supplied daily summaries are consistent with a higher-current regime followed by a lower-current regime. However, the 14 November daily median returns to approximately 16.58 A between lower-current dates (13 and 15 November). This non-monotonic daily pattern must not be smoothed away or assumed to be an error. It may reflect distinct discharge sessions, a change in operating mission, or another protocol/data feature; session-level inspection and the original experiment log are needed before interpreting the sequence.
+
+The lower-stage measured medians (about 9.55–9.71 A) are above the nominal 9.30 A protocol value. Nominal protocol and measured current must be reported separately. The supplied output ends on 18 January 2023 and does not establish the full lifetime, EOL label, or capacity trigger.
