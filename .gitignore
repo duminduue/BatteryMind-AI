@@ -58,3 +58,9 @@ node_modules/
 dist/
 build/
 coverage/
+
+# Exploratory audit outputs
+segment_audit/
+segment_audit_tol_015/
+segment_audit_tol_030/
+segment_audit_tol_050/
