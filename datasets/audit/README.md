@@ -562,3 +562,15 @@ A local inspection printed the first three detected segments in the 35–45 s du
 - Pack 5.1: estimated durations 40.815, 40.564, and 40.917 s; sample counts were 42, 41, and 40. Current ranges were 0.0365, 0.1460, and 0.0345 A.
 
 These spot-checks are consistent with stable measured-current plateaus of approximately 40 s for the selected examples. They are a small, selection-biased sample of detected segments and do not validate all detected segments or prove the commanded-load schedule. A broader validation should inspect randomly or systematically sampled examples from each duration band and compare the raw time-current trace across transitions.
+
+
+### Manual spot-check of detected ~60 s plateaus
+
+A local inspection printed the first three detected segments in the 55–65 s duration band for each variable-current pack. The examples show:
+
+- Pack 4.0: estimated durations 60.141, 60.167, and 60.393 s; sample counts 63, 63, and 62. Current ranges were 0.0832, 0.0689, and 0.0717 A.
+- Pack 4.1: estimated durations 60.348, 60.314, and 59.428 s; sample counts 62, 62, and 61. Current ranges were 0.0474, 0.0576, and 0.0311 A.
+- Pack 5.0: estimated durations 60.567, 60.758, and 60.514 s; sample counts 62, 62, and 61. Current ranges were 0.0601, 0.1677, and 0.0760 A.
+- Pack 5.1: estimated durations 60.206, 60.270, and 60.324 s; sample counts 62, 62, and 61. Current ranges were 0.1483, 0.0731, and 0.0519 A.
+
+These selected examples are consistent with stable measured-current plateaus of approximately 60 s. They are a small, selection-biased sample of detected segments and do not validate all detections or prove the commanded-load schedule. A broader validation should inspect examples selected systematically across dates and duration bands and compare raw time-current traces across transitions.
