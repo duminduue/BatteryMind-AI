@@ -2,6 +2,13 @@
 
 This index summarises the first eight screened studies. These are structured screening notes, not substitutes for reading and annotating each complete paper. Where only the publisher abstract or highlights were accessible, that limitation is stated.
 
+## Detailed critical appraisals
+
+- [Oyewole et al. (2025) — DG-PNUTS](2025-oyewole-dg-pnuts.md)
+- [Physics-driven prior + heteroscedastic GPR (2026)](2026-physics-prior-heteroscedastic-gpr.md)
+
+These two records are **abstract-level analyses** because full text was not accessible during this review. They identify what must be checked in the full article; they are not full-text reviews or reproductions.
+
 ## P01 — 2022: Physics-based modelling + ML for degradation diagnostics
 
 **Title:** Integrating physics-based modeling and machine learning for degradation diagnostics of lithium-ion batteries  
