@@ -550,3 +550,15 @@ The first-pass segmentation tool (`tools/audit_variable_current_segments.py`) wa
 The detected-duration distribution contains concentrations in the 35–45 s, 55–65 s, and 75–85 s bins, which are broadly near the dataset documentation's stated 40 s, 60 s, and 80 s variable-load segment durations. However, substantial counts also occur below 5 s and above 85 s. These are algorithm-detected plateaus, not confirmed commanded segments. Counts depend on the 0.30 A tolerance, the 2 s continuity-gap rule, filtering to regular-discharge mission rows, and the duration-estimation method. They must not be reported as validation of the experimental schedule.
 
 The current segmentation is exploratory and requires refinement/validation against raw time-current traces, sampling intervals, mission boundaries, and the dataset authors' protocol before using segment duration as a scientific feature. Do not silently discard short or long detections as outliers.
+
+
+### Manual spot-check of detected ~40 s plateaus
+
+A local inspection printed the first three detected segments in the 35–45 s duration band for each variable-current pack. The examples show:
+
+- Pack 4.0: estimated durations 40.201, 40.134, and 40.301 s; each had 42 samples. Current ranges were 0.0565, 0.0697, and 0.0684 A.
+- Pack 4.1: estimated durations 40.853, 40.834, and 40.869 s; each had 42 samples. Current ranges were 0.0368, 0.0314, and 0.0984 A.
+- Pack 5.0: estimated durations 40.992, 40.674, and 40.737 s; sample counts were 42, 41, and 41. Current ranges were 0.0600, 0.0566, and 0.0703 A.
+- Pack 5.1: estimated durations 40.815, 40.564, and 40.917 s; sample counts were 42, 41, and 40. Current ranges were 0.0365, 0.1460, and 0.0345 A.
+
+These spot-checks are consistent with stable measured-current plateaus of approximately 40 s for the selected examples. They are a small, selection-biased sample of detected segments and do not validate all detected segments or prove the commanded-load schedule. A broader validation should inspect randomly or systematically sampled examples from each duration band and compare the raw time-current trace across transitions.
