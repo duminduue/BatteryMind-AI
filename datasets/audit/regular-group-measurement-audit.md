@@ -133,3 +133,27 @@ It does **not** yet establish that the 40/60/80-second protocol has been fully r
 ## Reproducibility note
 
 The raw ZIP archive and locally generated segment CSV/PNG outputs remain outside this repository. The numerical summaries in this document are transcribed from local audit outputs supplied during the project workflow. The local tool versions and exact command parameters should be committed or recorded before treating this audit as a fully reproducible pipeline.
+
+
+### Duration-band current comparison
+
+For the refined segmentation CSV generated with a current tolerance of 0.30 A and maximum adjacent-sample gap of 2.0 s, candidate segments were grouped into duration bands of 35–<45 s, 55–<65 s and 75–<85 s. The table reports the number of candidate segments in each band and the median of their per-segment measured-current medians.
+
+| Pack | Duration band | Candidate segments | Median segment current (A) |
+|---|---:|---:|---:|
+| 4.0 | 40 s | 137 | 17.7429 |
+| 4.0 | 60 s | 176 | 18.2848 |
+| 4.0 | 80 s | 256 | 17.3831 |
+| 4.1 | 40 s | 1,188 | 14.7355 |
+| 4.1 | 60 s | 895 | 14.8950 |
+| 4.1 | 80 s | 638 | 15.4085 |
+| 5.0 | 40 s | 147 | 17.7069 |
+| 5.0 | 60 s | 188 | 18.1919 |
+| 5.0 | 80 s | 319 | 17.4133 |
+| 5.1 | 40 s | 1,014 | 14.5724 |
+| 5.1 | 60 s | 631 | 14.6815 |
+| 5.1 | 80 s | 444 | 15.1892 |
+
+The pack-level current distributions differ: packs 4.0 and 5.0 have higher segment-current medians than packs 4.1 and 5.1 in these selected duration bands. Within packs 4.1 and 5.1, the median segment current increases across the 40 s, 60 s and 80 s bands in this output. Packs 4.0 and 5.0 do not show the same monotonic pattern.
+
+These are descriptive summaries of algorithmically detected candidate segments. The median is calculated across candidate-segment medians, not across all raw samples, and candidate counts are not independent experimental replicates. Because the segmentation is parameter-sensitive and some selected intervals contain internal current changes, these results must not be interpreted as confirmed commanded-load levels or causal effects of duration on current.
