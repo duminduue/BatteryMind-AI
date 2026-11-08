@@ -89,6 +89,22 @@ The ±5-second counts include only detections whose estimated duration is within
 
 No tolerance is selected as scientifically correct at this stage. The 0.30 A result is retained as the initial exploratory reference because it was the first-pass setting, not because it has been validated. Further refinement should compare candidate boundaries with raw traces and protocol records, quantify sensitivity to the time-gap rule, and use systematic rather than first-match spot checks.
 
+### Refined segmentation boundary-reason audit
+
+The refined segmentation run was executed locally on the randomized NASA archive for packs 4.0, 4.1, 5.0 and 5.1 using a current tolerance of 0.30 A and a maximum adjacent-sample time gap of 2.0 s. The resulting CSV contained 8,301 candidate segments.
+
+| Pack | Total candidate segments | Ended by current change beyond tolerance | Ended by mission or mode change |
+|---|---:|---:|---:|
+| 4.0 | 821 | 685 | 136 |
+| 4.1 | 3,739 | 3,273 | 466 |
+| 5.0 | 951 | 827 | 124 |
+| 5.1 | 2,790 | 2,498 | 292 |
+| **Total** | **8,301** | **7,283** | **1,018** |
+
+For this run, all reported segment endings were attributed to either a measured-current change beyond the configured tolerance or a mission/mode change. No time-gap, date-change, missing-current/time, non-finite-current, or end-of-file boundary was reported in the displayed boundary-reason counts.
+
+These are algorithmic boundary labels, not verified physical load-command transitions. In particular, the large number of current-change boundaries may reflect genuine load-level changes, measurement variation, or segmentation sensitivity. The result alone cannot distinguish these explanations or establish the intended 40/60/80-second schedule.
+
 ### Selected trace checks
 
 **Pack 5.0, 2022-07-22:** A detected interval from 7671.360 to 7752.344 s was estimated at 81.932 s. The wider raw trace and 20-second bins show a gradual rise in median current from approximately 23.79 A to 24.23 A across the combined 7668–7952 s interval. Three consecutive detections in this region (81.932, 94.273 and 105.211 s) do not correspond to three clearly separated, stable current plateaus. This is an example of over-segmentation/merging behaviour that requires algorithm refinement.
