@@ -13,10 +13,12 @@
 7. Stanchev, P., & Hinov, N. (2026). *Physics-Informed Explainable Machine Learning for Hybrid State of Health and Remaining Useful Life Estimation of Lithium-Ion Batteries.* Batteries, 12(10), 401. https://doi.org/10.3390/batteries12100401
 8. *A two-stage probabilistic framework with validity screening and physics-informed trend modeling for lithium-ion battery health estimation from short discharge transients.* Journal of Energy Storage, 169, 122763 (2026). https://doi.org/10.1016/j.est.2026.122763
 
+9. Zhao, Z., Feng, M., Yu, Q., Yuan, H., Wang, F., & Zhai, Z. (2026). *Towards trustworthy lithium-ion battery remaining useful life prediction with uncertainty quantification.* Journal of Energy Storage, 167, 122408. https://doi.org/10.1016/j.est.2026.122408
+
 ## Dataset sources
 
-9. NASA / Dashlink. *Li-ion Battery Aging Datasets.* https://catalog.data.gov/dataset/li-ion-battery-aging-datasets
-10. Center for Advanced Life Cycle Engineering (CALCE), University of Maryland. *Battery Research Data.* https://calce.umd.edu/data
+10. NASA / Dashlink. *Li-ion Battery Aging Datasets.* https://catalog.data.gov/dataset/li-ion-battery-aging-datasets
+11. Center for Advanced Life Cycle Engineering (CALCE), University of Maryland. *Battery Research Data.* https://calce.umd.edu/data
 
 ## Source verification notes
 
