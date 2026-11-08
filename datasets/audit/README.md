@@ -474,3 +474,18 @@ After correcting the mode comparison and parsing `start_time` as a date before g
 The dataset documentation lists regular pack 2.1 in the nominal 19.0 A constant-current group. The observed daily medians are approximately 19.52–19.91 A, above the nominal protocol value. This is a measured-current observation only; the six represented dates do not establish the pack's complete lifetime, a protocol deviation, or a sensor issue.
 
 This inspection also demonstrates that categorical values and date formats must be checked per CSV before applying a shared audit script. This is a daily-summary audit of qualifying regular-discharge records only. The output does not establish capacity fade, SOH ground truth, failure/EOL labels, or RUL target validity.
+
+
+### Twenty-first measurement-level inspection: regular battery41.csv (pack 4.1)
+
+The local daily aggregation of regular discharge records (`mode` equal to `-1` or `-1.0`, `mission_type=1.0`, non-empty `current_load`) for `regular_alt_batteries/battery41.csv` produced:
+
+- 43 represented discharge dates.
+- Date range: 6 August 2022 to 9 October 2022.
+- Daily median current range: approximately 13.987–16.248 A.
+- First three represented dates: 6 August (5,510 samples; median 14.493 A), 7 August (4,296; 14.500 A), and 8 August (4,680; 14.571 A).
+- Last three represented dates: 7 October (3,880; 15.603 A), 8 October (3,813; 15.602 A), and 9 October (1,096; 16.248 A).
+
+The dataset documentation lists regular pack 4.1 as a variable-current pack with an approximate average current of 14.3 A and current segments held for 40, 60, or 80 seconds with randomly selected amplitudes and segment lengths. The daily medians (approximately 13.99–16.25 A) are not a direct test of the documented segment-level variable-current protocol. Do not interpret the daily median range as a contradiction of the approximate average protocol without calculating segment-level and lifetime-level current statistics.
+
+This is a daily-summary audit of qualifying regular-discharge records only. The output does not establish capacity fade, SOH ground truth, failure/EOL labels, or RUL target validity.
