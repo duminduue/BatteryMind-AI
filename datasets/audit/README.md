@@ -534,3 +534,19 @@ The local daily aggregation of regular discharge records (`mode` equal to `-1` o
 The dataset documentation lists regular pack 5.0 as a variable-current pack with an approximate average current of 17 A and variable segments held for 40, 60, or 80 seconds. Daily medians are not a direct test of this segment-level protocol. Segment-level and lifetime-level current analysis is required before assessing agreement with the documented approximate average.
 
 This is a daily-summary audit of qualifying regular-discharge records only. The output does not establish capacity fade, SOH ground truth, failure/EOL labels, or RUL target validity.
+
+
+### Exploratory segment-duration distribution: variable-current regular packs 4.0, 4.1, 5.0, 5.1
+
+The first-pass segmentation tool (`tools/audit_variable_current_segments.py`) was run with its default current tolerance of 0.30 A. It detected 8,301 approximate plateaus across the four packs. The subsequent duration-bin check of `segment_audit/variable_current_segments.csv` returned:
+
+| Pack | Total detected | <5 s | 5–20 s | 20–35 s | 35–45 s | 45–55 s | 55–65 s | 65–75 s | 75–85 s | >85 s |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 4.0 | 821 | 149 | 8 | 21 | 137 | 12 | 176 | 13 | 256 | 49 |
+| 4.1 | 3,739 | 493 | 98 | 79 | 1,188 | 52 | 895 | 36 | 638 | 260 |
+| 5.0 | 951 | 128 | 21 | 28 | 147 | 23 | 188 | 32 | 319 | 65 |
+| 5.1 | 2,790 | 308 | 64 | 54 | 1,014 | 41 | 631 | 27 | 444 | 207 |
+
+The detected-duration distribution contains concentrations in the 35–45 s, 55–65 s, and 75–85 s bins, which are broadly near the dataset documentation's stated 40 s, 60 s, and 80 s variable-load segment durations. However, substantial counts also occur below 5 s and above 85 s. These are algorithm-detected plateaus, not confirmed commanded segments. Counts depend on the 0.30 A tolerance, the 2 s continuity-gap rule, filtering to regular-discharge mission rows, and the duration-estimation method. They must not be reported as validation of the experimental schedule.
+
+The current segmentation is exploratory and requires refinement/validation against raw time-current traces, sampling intervals, mission boundaries, and the dataset authors' protocol before using segment duration as a scientific feature. Do not silently discard short or long detections as outliers.
