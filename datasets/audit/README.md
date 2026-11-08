@@ -593,3 +593,10 @@ These selected examples are consistent with measured-current plateaus around 80�
 The interval 7668–7952 s was divided into 20-second bins. Median measured discharge current rose gradually from 23.7941 A (7668–7688 s) through 24.2261 A (7848–7868 s), then declined slightly to 24.0174 A in the final partial bin (7948–7952 s). Most bins contained 19–22 samples; the final partial bin contained 5.
 
 This pattern is more consistent with a slowly varying current level over the inspected interval than with three clearly separated, stable commanded-current plateaus. The earlier detected intervals (81.932, 94.273, and 105.211 s) therefore should not be interpreted as confirmed load-command durations. The binned medians alone do not establish the cause of the gradual change or prove whether a protocol transition occurred. Raw trace inspection and validation against the experiment's command schedule would be needed.
+
+
+### Contrast case: Pack 4.0 raw trace around an ~80 s detection (2022-07-22)
+
+The raw-current plot for the detected interval 10151.363–10230.688 s (estimated duration 80.279 s) shows a visibly different pattern from the inspected Pack 5.0 interval. Pack 4.0 has a step up from roughly 17.6 A to roughly 18.3 A near the detected start, remains approximately level through the shaded interval, and steps down to roughly 16.7 A near the detected end. A later step up to roughly 19 A is also visible near the end of the plotted window.
+
+This visual example is consistent with the detected interval corresponding to a distinct, approximately stable measured-current plateau bounded by changes in current. It provides useful positive contrast to the Pack 5.0 example, where the detected intervals did not align with clear separate transitions. This is a visual spot-check only; precise transition timing, tolerance sensitivity, and representativeness across all packs remain to be quantified.
