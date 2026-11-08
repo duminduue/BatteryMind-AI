@@ -453,3 +453,24 @@ The local daily aggregation of regular discharge records (`mode=-1.0`, `mission_
 The dataset documentation lists regular pack 3.0 in the nominal 19.0 A constant-current group. The observed daily medians are approximately 19.47–19.89 A, above the nominal protocol value. This is a measured-current observation only; the seven represented dates do not establish the pack's complete lifetime, a protocol deviation, or a sensor issue.
 
 This is a daily-summary audit of qualifying regular-discharge records only. The output does not establish capacity fade, SOH ground truth, failure/EOL labels, or RUL target validity.
+
+
+### Twentieth measurement-level inspection: regular battery21.csv (pack 2.1)
+
+The CSV uses integer-like mode strings (`-1`, `0`, `1`) rather than the decimal-form strings seen in several other inspected files. The initial filter using `mode="-1.0"` therefore returned no qualifying rows. A diagnostic count found 530,718 total rows: mode `-1` 46,680; mode `0` 245,491; mode `1` 238,547. Mission-type counts were blank 484,038; `1.0` 33,026; and `0.0` 13,654.
+
+After correcting the mode comparison and parsing `start_time` as a date before grouping, the local aggregation of regular discharge records (`mode=-1`, `mission_type=1.0`, non-empty `current_load`) produced:
+
+- 6 represented discharge dates.
+- Date range: 27 July 2022 to 4 August 2022.
+- Daily median current range: approximately 19.523–19.914 A.
+- 27 July: 5,129 samples; median 19.523 A.
+- 29 July: 5,356 samples; median 19.569 A.
+- 31 July: 7,453 samples; median 19.659 A.
+- 1 August: 6,254 samples; median 19.765 A.
+- 3 August: 4,421 samples; median 19.840 A.
+- 4 August: 4,413 samples; median 19.914 A.
+
+The dataset documentation lists regular pack 2.1 in the nominal 19.0 A constant-current group. The observed daily medians are approximately 19.52–19.91 A, above the nominal protocol value. This is a measured-current observation only; the six represented dates do not establish the pack's complete lifetime, a protocol deviation, or a sensor issue.
+
+This inspection also demonstrates that categorical values and date formats must be checked per CSV before applying a shared audit script. This is a daily-summary audit of qualifying regular-discharge records only. The output does not establish capacity fade, SOH ground truth, failure/EOL labels, or RUL target validity.
