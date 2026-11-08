@@ -125,3 +125,28 @@ The README's BibTeX template has blank DOI and URL fields; do not invent them.
 Audit the complete CSV inventory at pack level: parse pack IDs from filenames, map each pack to its documented load protocol and lineage, inspect the remaining two battery groups, and investigate how pack failure/EOL is operationally defined. Then determine whether the dataset supports SOH prediction, RUL prediction, or only selected prognostic tasks.
 
 **Important:** Archive file counts and a single-file sample do not establish dataset suitability or scientific independence.
+
+
+### Second measurement-level inspection: recommissioned battery03.csv
+
+The local scan of `recommissioned_batteries/battery03.csv` found:
+
+- Rows: 2,161,444.
+- Relative time: 0 to 2,210,055.058 seconds.
+- Recorded date range: 4 February 2023 to 13 March 2023.
+- Mode counts: charge (`1.0`) 1,163,402; rest (`0.0`) 654,715; discharge (`-1.0`) 343,327.
+- Discharge mission counts: reference (`mission_type=0.0`) 60,954; regular (`mission_type=1.0`) 282,373.
+- Observed ranges: charger voltage 0–8.776 V; battery temperature 0–80.314 °C; load voltage -0.027–9.058 V; load current 0.15–16.825 A.
+
+#### Observed regular-discharge current by date
+
+Daily statistics were calculated only from rows where `mode=-1.0`, `mission_type=1.0`, and `current_load` was non-empty.
+
+- 4–14 February: daily median current approximately 16.28–16.69 A.
+- 15–19 February: daily median approximately 14.95–15.08 A.
+- 20 February: median 7.510 A and mean 9.865 A, consistent with a mixed/transition day.
+- 21 February–13 March: daily median approximately 7.39–7.57 A.
+
+The observed stages broadly support the documented three-stage protocol for pack 3.2 (nominal sequence 16 A → 14.3 A → 7.5 A). However, measured daily medians are not identical to nominal protocol values. This is an empirical correspondence, not proof of the exact transition trigger or capacity threshold. The transition dates should be checked against the original protocol and capacity records before making stronger claims.
+
+The daily aggregation is descriptive. It does not establish SOH, capacity fade, or EOL labels, and the 20 February mean is influenced by the transition between current regimes.
