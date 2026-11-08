@@ -1,30 +1,28 @@
-# Research Questions and Hypotheses
+# Research Questions — Revised Working Set
 
-**Status:** Provisional; revise after literature and dataset audits.
+**Status:** Provisional; subject to full-text screening and dataset feasibility.
 
-## Research questions
+## Main question
 
-- **RQ1:** How accurately do suitable baseline models estimate SOH and RUL on the selected battery ageing data under leakage-resistant evaluation?
-- **RQ2:** Do selected physically motivated constraints improve performance, data efficiency, or generalisation in the defined evaluation setting?
-- **RQ3:** How well do selected uncertainty methods calibrate predictive intervals for SOH and RUL?
-- **RQ4:** How do models perform on cells or operating conditions excluded from model development?
-- **RQ5:** What trade-offs exist among accuracy, uncertainty calibration, compute cost, and implementation complexity?
+How do physics-guided constraints and predictive-uncertainty methods affect the accuracy, calibration, and physical consistency of lithium-ion battery SOH/RUL estimates when training data are limited and evaluation cells or datasets are held out?
 
-## Testable hypotheses (to refine)
+## Sub-questions
 
-- **H1:** A physically guided model may improve one or more predefined performance measures relative to a matched baseline under a specified data regime.
-- **H2:** An uncertainty-aware approach can provide intervals with empirically measurable coverage and width on held-out data.
-- **H3:** Performance and calibration may deteriorate under selected cell or operating-condition shifts; the extent must be measured.
+- **RQ1 — Baselines:** How do selected baseline SOH/RUL models perform under cell-aware and out-of-domain evaluation?
+- **RQ2 — Physics guidance:** Does a clearly specified, physically justified constraint improve accuracy or degradation consistency against a matched data-driven baseline?
+- **RQ3 — Uncertainty:** How do selected uncertainty methods compare in interval coverage, interval width/sharpness, and calibration?
+- **RQ4 — Shift:** How do point prediction and uncertainty calibration change between in-domain, leave-one-cell-out, and compatible cross-dataset/condition-held-out settings?
+- **RQ5 — Data efficiency:** How sensitive are these outcomes to pre-defined training-data budgets?
 
-These hypotheses are deliberately non-directional about guaranteed improvement. Null or negative results are valid research outcomes.
+## Candidate hypotheses
 
-## Operational definitions needed
+- H1: The effect of physics guidance depends on dataset and evaluation domain; improvement must not be assumed.
+- H2: Nominal uncertainty coverage may deteriorate under cell/domain shift, with variation across methods.
+- H3: Lower training-data budgets may change the relative performance of physics-guided and data-driven models.
+- H4: Better point accuracy does not necessarily imply better uncertainty calibration.
 
-Before experiments, define:
-- SOH reference capacity and calculation.
-- RUL unit (cycles, time, or another unit).
-- End-of-life criterion and its source-specific justification.
-- Prediction horizon and available input window.
-- Cell/condition grouping for each split.
-- What constitutes an unseen condition.
-- Calibration metric(s) and nominal interval levels.
+## Operational definitions required before experiments
+
+SOH reference capacity and formula; RUL unit and EOL threshold; input window and prediction horizon; cell/domain split; data-budget levels; calibration-data availability; nominal interval levels and metrics; and a physically justified degradation-consistency metric.
+
+Null, negative, and dataset-dependent results are valid outcomes.
