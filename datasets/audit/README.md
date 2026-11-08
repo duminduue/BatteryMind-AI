@@ -586,3 +586,10 @@ A local inspection printed the first three detected segments in the 75–85 s du
 - Pack 5.1: estimated durations 81.678, 81.118, and 81.124 s; sample counts 84, 82, and 82. Current ranges were 0.0975, 0.0632, and 0.0616 A.
 
 These selected examples are consistent with measured-current plateaus around 80–82 s under the current duration-estimation method. They are a small, selection-biased sample and do not validate all detections or prove the commanded-load schedule. The wider range in the first selected pack 5.0 example (0.2989 A) is close to the configured 0.30 A segmentation tolerance and deserves further trace-level review.
+
+
+### Time-binned review of the Pack 5.0 trace (2022-07-22)
+
+The interval 7668–7952 s was divided into 20-second bins. Median measured discharge current rose gradually from 23.7941 A (7668–7688 s) through 24.2261 A (7848–7868 s), then declined slightly to 24.0174 A in the final partial bin (7948–7952 s). Most bins contained 19–22 samples; the final partial bin contained 5.
+
+This pattern is more consistent with a slowly varying current level over the inspected interval than with three clearly separated, stable commanded-current plateaus. The earlier detected intervals (81.932, 94.273, and 105.211 s) therefore should not be interpreted as confirmed load-command durations. The binned medians alone do not establish the cause of the gradual change or prove whether a protocol transition occurred. Raw trace inspection and validation against the experiment's command schedule would be needed.
