@@ -317,3 +317,18 @@ The local daily aggregation of regular discharge records (`mode=-1.0`, `mission_
 The dataset documentation lists regular pack 0.0 in the nominal 16.0 A constant-current group. The observed daily medians are consistently above 16 A in the supplied summary. Preserve the distinction between the documented nominal protocol and measured current; this difference alone does not establish a protocol deviation, sensor error, or abnormal operating condition.
 
 This is a daily-summary audit of qualifying regular-discharge records only. The 14 represented dates do not establish that no other activity occurred on dates absent from this filtered summary. The output does not establish capacity fade, SOH ground truth, failure/EOL labels, or RUL target validity.
+
+
+### Eleventh measurement-level inspection: regular battery10.csv (pack 1.0)
+
+The local daily aggregation of regular discharge records (`mode=-1.0`, `mission_type=1.0`, non-empty `current_load`) for `regular_alt_batteries/battery10.csv` produced:
+
+- 11 represented discharge dates.
+- Date range: 22 July 2022 to 6 August 2022.
+- Daily median current range: approximately 16.256–16.788 A.
+- First three represented dates: 22 July (1,676 samples; median 16.256 A), 23 July (8,557; 16.279 A), and 24 July (5,140; 16.340 A).
+- Last three represented dates: 3 August (5,343; 16.770 A), 4 August (5,407; 16.788 A), and 6 August (3,677; 16.782 A).
+
+The dataset documentation lists regular pack 1.0 in the nominal 16.0 A constant-current group. The observed daily medians are above 16 A in the supplied summary. Preserve the distinction between documented nominal protocol and measured current; this difference alone does not establish a protocol deviation, sensor error, or abnormal operating condition.
+
+This is a daily-summary audit of qualifying regular-discharge records only. The 11 represented dates do not establish that no other activity occurred on dates absent from this filtered summary. The output does not establish capacity fade, SOH ground truth, failure/EOL labels, or RUL target validity.
