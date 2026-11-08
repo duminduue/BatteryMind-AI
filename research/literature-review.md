@@ -166,3 +166,22 @@ None of these is claimed as novel yet. Search more broadly and inspect full pape
 3. Search additional 2022–2026 studies on conformal prediction, domain generalisation, early-life RUL, and cross-dataset validation.
 4. Audit NASA and CALCE files before locking the experimental design.
 5. Write a bounded gap statement only after evidence comparison is complete.
+
+
+### 2.9 SMoE-LSTM with deep evidential uncertainty (2026)
+
+**Authors:** Zhibin Zhao, Mingqi Feng, Qiuyu Yu, Hongming Yuan, Fujin Wang, and Zhi Zhai.  
+**Title:** Towards trustworthy lithium-ion battery remaining useful life prediction with uncertainty quantification.  
+**Venue:** Journal of Energy Storage, 167, article 122408 (30 July 2026).  
+**DOI:** https://doi.org/10.1016/j.est.2026.122408
+
+**Evidence from publisher abstract and accessible introductory/contribution text:** A sparsely-gated mixture-of-experts LSTM (SMoE-LSTM) is used to model multi-stage degradation. Deep evidential regression with a Normal-Inverse-Gamma (NIG) prior outputs RUL and decomposed aleatoric/epistemic uncertainty in one forward pass. The paper reports validation on the MIT-Stanford dataset, average RMSE 16.11 and R² 0.9821, and claims improved calibration and inference efficiency relative to MC Dropout and ensemble methods.
+
+**Critical questions:** The accessible record does not fully establish independent cell counts, chemistry, EOL/RUL units, cell-wise split design, nominal interval coverage, calibration metrics, OOD testing, or per-condition results. A single-pass evidential output does not by itself prove calibration. Expert activation is a diagnostic view, not automatically a causal explanation.
+
+**Research relevance:** Mixture-of-experts sequence modelling, NIG evidential regression, aleatoric/epistemic decomposition, and sampling-free UQ are already applied to battery RUL. These components alone cannot be claimed as novel.
+
+**Evidence level:** Publisher abstract and accessible introductory/contribution text; full experimental tables and supplementary material still require extraction.  
+**Detailed analysis:** [Paper 03 analysis](../literature/paper-analysis/2026-smoe-lstm-evidential-uq.md)  
+**Source:** https://www.sciencedirect.com/science/article/pii/S2352152X26020724
+
