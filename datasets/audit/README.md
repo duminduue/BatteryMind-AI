@@ -407,3 +407,18 @@ The local daily aggregation of regular discharge records (`mode=-1.0`, `mission_
 The dataset documentation lists regular pack 0.1 in the nominal 9.30 A constant-current group. The observed daily medians are close to the documented nominal current, with a gradual increase in the measured daily medians over the represented period. This is a descriptive trend only; it does not establish a change in the operating protocol or its cause.
 
 This is a daily-summary audit of qualifying regular-discharge records only. The 70 represented dates do not establish that no other activity occurred on dates absent from this filtered summary. The output does not establish capacity fade, SOH ground truth, failure/EOL labels, or RUL target validity.
+
+
+### Seventeenth measurement-level inspection: regular battery11.csv (pack 1.1)
+
+The local daily aggregation of regular discharge records (`mode=-1.0`, `mission_type=1.0`, non-empty `current_load`) for `regular_alt_batteries/battery11.csv` produced:
+
+- 71 represented discharge dates.
+- Date range: 9 August 2022 to 11 November 2022.
+- Daily median current range: approximately 9.257–9.877 A.
+- First three represented dates: 9 August (9,820 samples; median 9.257 A), 10 August (9,590; 9.291 A), and 11 August (12,527; 9.287 A).
+- Last three represented dates: 7 November (10,414; 9.849 A), 8 November (6,020; 9.857 A), and 11 November (1,508; 9.846 A).
+
+The dataset documentation lists regular pack 1.1 in the nominal 9.30 A constant-current group. The observed daily medians begin close to 9.30 A and rise to approximately 9.85 A in the last represented dates. This is a descriptive measured-current trend only; it does not establish a change in the operating protocol or its cause.
+
+This is a daily-summary audit of qualifying regular-discharge records only. The 71 represented dates do not establish that no other activity occurred on dates absent from this filtered summary. The output does not establish capacity fade, SOH ground truth, failure/EOL labels, or RUL target validity.
