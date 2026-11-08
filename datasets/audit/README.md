@@ -504,3 +504,18 @@ The local daily aggregation of regular discharge records (`mode` equal to `-1` o
 The dataset documentation lists regular pack 5.1 as a variable-current pack with an approximate average current of 14.3 A and variable segments held for 40, 60, or 80 seconds. Daily medians are not a direct test of this segment-level protocol. In particular, the final represented date has only 170 qualifying samples, so its median should be interpreted with that low sample count in mind. Segment-level and lifetime-level current analysis is needed before assessing agreement with the documented approximate average.
 
 This is a daily-summary audit of qualifying regular-discharge records only. The output does not establish capacity fade, SOH ground truth, failure/EOL labels, or RUL target validity.
+
+
+### Twenty-third measurement-level inspection: regular battery40.csv (pack 4.0)
+
+The local daily aggregation of regular discharge records (`mode` equal to `-1` or `-1.0`, `mission_type=1.0`, non-empty `current_load`) for `regular_alt_batteries/battery40.csv` produced:
+
+- 9 represented discharge dates.
+- Date range: 22 July 2022 to 3 August 2022.
+- Daily median current range: approximately 17.172–17.930 A.
+- First three represented dates: 22 July (1,543 samples; median 17.172 A), 23 July (8,019; 17.231 A), and 24 July (3,938; 17.280 A).
+- Last three represented dates: 31 July (6,654; 17.930 A), 1 August (5,945; 17.735 A), and 3 August (4,883; 17.667 A).
+
+The dataset documentation lists regular pack 4.0 as a variable-current pack with an approximate average current of 17 A and variable segments held for 40, 60, or 80 seconds. Daily medians are not a direct test of this segment-level protocol. Segment-level and lifetime-level current analysis is required before assessing agreement with the documented approximate average.
+
+This is a daily-summary audit of qualifying regular-discharge records only. The output does not establish capacity fade, SOH ground truth, failure/EOL labels, or RUL target validity.
