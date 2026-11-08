@@ -1,45 +1,36 @@
-# Research Gap — Evidence Log
+# Research Gap — Evidence-Based Revision
 
-**Status: OPEN / NOT YET ESTABLISHED**
+**Status: preliminary candidate, not a novelty claim.** Last reviewed 8 November 2026.
 
-This file is a structured workspace, not a claim that a research gap has already been proven.
+## Original broad idea rejected
 
-## Working problem area
+The original concept combined physics-guided SOH/RUL prediction, unseen-cell/condition generalisation, and uncertainty calibration. The 2023–2026 literature already contains hybrid Bayesian physics-informed prognosis, PINN SOH estimation, domain generalisation, cross-cell physics-guided SOH with conformal UQ, and RUL uncertainty-calibration studies. Simply combining these elements is not novel.
 
-Reliable battery SOH and RUL prediction when labelled data are limited and test cells or operating conditions differ from training data.
+## Evidence
 
-## Candidate gap dimensions to investigate
+| Study | Evidence | Implication |
+|---|---|---|
+| Nascimento et al. (2023), https://doi.org/10.1038/s41598-023-33018-0 | Hybrid Bayesian physics-informed battery prognosis | Bayesian + physics-guided is prior art |
+| Wang et al. (2024), https://doi.org/10.1038/s41467-024-48779-z | PINN SOH with multiple datasets, small-sample and transfer experiments | Physics-guided SOH transfer is prior art |
+| Chen et al. (2024), https://doi.org/10.1016/j.jpowsour.2024.234696 | Domain-generalisation SOH on unknown domains | Unseen-domain SOH is prior art |
+| Chen et al. (2026), https://doi.org/10.3390/batteries12090340 | Physics-guided/domain-aware cross-cell SOH plus split conformal UQ; LOCO on NASA B0005/B0006/B0007 | Very close overlap; original framing is not novel |
+| Wu et al. (2026), https://doi.org/10.3390/a19070535 | Early-life RUL UQ, conformal methods and a later shifted test | Early RUL UQ under shift is already studied |
+| Trustworthy RUL UQ (2026), https://doi.org/10.1016/j.est.2026.122408 | Evidential UQ and RUL prediction intervals | Generic trustworthy RUL UQ is prior art |
+| Rizanov et al. (2026), https://doi.org/10.3390/batteries12070255 | Review of 176 works and multi-fidelity validation | Trustworthy/transferable validation is actively reviewed |
 
-1. Whether reported improvements from physics-guided models persist under cell-held-out and condition-held-out tests.
-2. Whether uncertainty estimates remain calibrated under cell or operating-condition distribution shift.
-3. Whether physically motivated constraints improve data efficiency without imposing invalid assumptions on non-monotonic or protocol-dependent observations.
-4. Whether studies compare methods using compatible datasets, label definitions, and leakage-resistant splits.
-5. Whether a practical trade-off among accuracy, calibration, data needs, and computational cost is adequately quantified.
+## Candidate gap to test
 
-These are questions for investigation, not confirmed gaps.
+Conduct an independent, controlled benchmark of how physics-guided constraints and uncertainty-calibration strategies behave together under explicitly defined low-data and out-of-domain battery evaluation protocols.
 
-## Evidence required before claiming novelty
+Potential comparison:
+- Matched data-driven baseline vs physically guided variant.
+- Selected uncertainty methods (ensembles, quantile regression, split/adaptive conformal) after feasibility review.
+- In-domain vs leave-one-cell-out and compatible cross-dataset/condition hold-outs.
+- Pre-defined training-data budgets.
+- Point error, interval coverage, interval width/sharpness, calibration diagnostics, and physically justified degradation-consistency metrics.
 
-For each relevant paper, record:
-- Exact bibliographic reference and DOI or stable publisher URL.
-- Publication status and year.
-- Dataset(s), chemistry, cell count, and operating conditions.
-- SOH/RUL label definitions.
-- Train/validation/test split design.
-- Whether cells and conditions are held out.
-- Physics prior/constraint and how it is implemented.
-- Uncertainty method and calibration evaluation.
-- Main results and limitations.
-- What remains untested relative to this project's proposed scope.
+## Draft gap statement — not approved
 
-## Gap statement template
+"Although physics-guided battery health estimation, domain adaptation, and uncertainty quantification have each been investigated, recent studies indicate that predictive-interval calibration may remain sensitive to cell-level and operating-domain shift. This study will conduct a controlled, leakage-resistant evaluation of the interaction between physics-guided constraints, data availability, and uncertainty calibration across explicitly held-out cells and compatible datasets."
 
-"Prior studies have investigated [verified methods] using [verified datasets/protocols]. However, the reviewed evidence indicates that [specific, bounded limitation], particularly under [clearly defined test setting]. This project therefore investigates [specific method/question] and evaluates it using [predefined protocol and metrics]."
-
-Do not complete this statement until the literature matrix contains sufficient verified evidence.
-
-## Decision log
-
-| Date | Decision / observation | Evidence | Status |
-|---|---|---|---|
-| 2026-11-08 | Working direction selected: physics-guided, data-efficient, uncertainty-calibrated prediction under unseen conditions | Project planning discussion; literature verification pending | Provisional |
+This must be revised or rejected after full-text screening and citation tracking. Do not claim novelty until the closest papers have been read in full and their splits, calibration sets, cell counts, and limitations compared.
