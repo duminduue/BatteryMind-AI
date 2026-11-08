@@ -574,3 +574,15 @@ A local inspection printed the first three detected segments in the 55–65 s du
 - Pack 5.1: estimated durations 60.206, 60.270, and 60.324 s; sample counts 62, 62, and 61. Current ranges were 0.1483, 0.0731, and 0.0519 A.
 
 These selected examples are consistent with stable measured-current plateaus of approximately 60 s. They are a small, selection-biased sample of detected segments and do not validate all detections or prove the commanded-load schedule. A broader validation should inspect examples selected systematically across dates and duration bands and compare raw time-current traces across transitions.
+
+
+### Manual spot-check of detected ~80 s plateaus
+
+A local inspection printed the first three detected segments in the 75–85 s duration band for each variable-current pack. The examples show:
+
+- Pack 4.0: estimated durations 80.279, 80.276, and 81.748 s; each had 84 samples. Current ranges were 0.0639, 0.0590, and 0.0634 A.
+- Pack 4.1: estimated durations 81.726, 81.738, and 80.754 s; sample counts 84, 84, and 82. Current ranges were 0.1724, 0.0513, and 0.0855 A.
+- Pack 5.0: estimated durations 81.932, 81.901, and 81.977 s; sample counts 86, 84, and 84. Current ranges were 0.2989, 0.0573, and 0.0669 A.
+- Pack 5.1: estimated durations 81.678, 81.118, and 81.124 s; sample counts 84, 82, and 82. Current ranges were 0.0975, 0.0632, and 0.0616 A.
+
+These selected examples are consistent with measured-current plateaus around 80–82 s under the current duration-estimation method. They are a small, selection-biased sample and do not validate all detections or prove the commanded-load schedule. The wider range in the first selected pack 5.0 example (0.2989 A) is close to the configured 0.30 A segmentation tolerance and deserves further trace-level review.
