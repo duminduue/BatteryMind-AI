@@ -258,3 +258,15 @@ The supplied daily aggregation of regular discharge records (`mode=-1.0`, `missi
 The dataset documentation lists pack 2.5 among the three-stage recommissioned packs with nominal sequence 16 A → 7.5 A → 14.3 A, with stage changes associated with approximate capacity thresholds of 2.2 Ah and 2.0 Ah. The observed sequence (about 16.2 A → 7.4 A → 15.0 A) broadly corresponds to those three nominal stages, but the measured medians differ from nominal values, especially in the final stage. Keep protocol currents and measured currents distinct.
 
 The daily aggregation suggests transition periods around 15 February and 1–3 March, but it does not establish exact transition times or verify the capacity thresholds. The 1–2 March means/medians differ substantially, showing why daily means alone can conceal mixed regimes. Session-level analysis and capacity/experiment logs are needed before attributing the transitions to the documented capacity triggers. This summary does not establish SOH or EOL labels.
+
+
+### Ninth measurement-level inspection: recommissioned battery53.csv
+
+The supplied daily aggregation of regular discharge records (`mode=-1.0`, `mission_type=1.0`, non-empty `current_load`) for `recommissioned_batteries/battery53.csv` shows:
+
+- 24 October–4 November 2022: daily median current approximately 14.712–15.104 A.
+- 19–22 November 2022: daily median current approximately 16.667–16.884 A.
+
+The dataset documentation lists pack 5.3 among two-stage recommissioned packs with nominal sequence 14.3 A → 16 A. The supplied measurements broadly support a change from the lower-current regime (about 14.7–15.1 A measured) to the higher-current regime (about 16.7–16.9 A measured), consistent with the documented direction of change. The measured daily medians are not identical to nominal protocol values and should be reported separately.
+
+The supplied daily summary has no listed regular-discharge dates between 5 and 18 November 2022. This is a gap in the supplied filtered dates, not evidence that the pack was inactive throughout the interval. The summary does not establish the exact transition time, capacity trigger, SOH, or EOL labels. Session-level and experiment-log checks remain necessary.
