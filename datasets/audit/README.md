@@ -422,3 +422,19 @@ The local daily aggregation of regular discharge records (`mode=-1.0`, `mission_
 The dataset documentation lists regular pack 1.1 in the nominal 9.30 A constant-current group. The observed daily medians begin close to 9.30 A and rise to approximately 9.85 A in the last represented dates. This is a descriptive measured-current trend only; it does not establish a change in the operating protocol or its cause.
 
 This is a daily-summary audit of qualifying regular-discharge records only. The 71 represented dates do not establish that no other activity occurred on dates absent from this filtered summary. The output does not establish capacity fade, SOH ground truth, failure/EOL labels, or RUL target validity.
+
+
+### Eighteenth measurement-level inspection: regular battery20.csv (pack 2.0)
+
+The local daily aggregation of regular discharge records (`mode=-1.0`, `mission_type=1.0`, non-empty `current_load`) for `regular_alt_batteries/battery20.csv` produced:
+
+- 3 represented discharge dates.
+- Date range: 22 July 2022 to 24 July 2022.
+- Daily median current range: approximately 19.516–19.608 A.
+- 22 July: 1,399 samples; median 19.516 A.
+- 23 July: 7,128 samples; median 19.551 A.
+- 24 July: 3,296 samples; median 19.608 A.
+
+The dataset documentation lists regular pack 2.0 in the nominal 19.0 A constant-current group. The observed daily medians are approximately 19.52–19.61 A, above the nominal protocol value. This is a measured-current observation only; the short three-date summary does not establish a protocol deviation, sensor issue, or the pack's complete lifetime.
+
+This is a daily-summary audit of qualifying regular-discharge records only. The output does not establish capacity fade, SOH ground truth, failure/EOL labels, or RUL target validity.
