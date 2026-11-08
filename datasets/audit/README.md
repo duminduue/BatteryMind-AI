@@ -347,3 +347,18 @@ The local daily aggregation of regular discharge records (`mode=-1.0`, `mission_
 The dataset documentation lists regular pack 3.1 in the nominal 12.9 A constant-current group. Most of the observed daily medians are near this nominal value, with the supplied daily range extending to approximately 13.76 A. Preserve the distinction between documented nominal protocol and measured current; the observed variation alone does not establish a protocol deviation or sensor issue.
 
 This is a daily-summary audit of qualifying regular-discharge records only. The 49 represented dates do not establish that no other activity occurred on dates absent from this filtered summary. The output does not establish capacity fade, SOH ground truth, failure/EOL labels, or RUL target validity.
+
+
+### Thirteenth measurement-level inspection: regular battery22.csv (pack 2.2)
+
+The local daily aggregation of regular discharge records (`mode=-1.0`, `mission_type=1.0`, non-empty `current_load`) for `regular_alt_batteries/battery22.csv` produced:
+
+- 40 represented discharge dates.
+- Date range: 6 August 2022 to 6 October 2022.
+- Daily median current range: approximately 12.987–13.812 A.
+- First three represented dates: 6 August (8,857 samples; median 12.987 A), 7 August (6,167; 13.008 A), and 8 August (6,584; 13.025 A).
+- Last three represented dates: 26 September (5,148; 13.777 A), 27 September (2,583; 13.787 A), and 6 October (4,227; 13.812 A).
+
+The dataset documentation lists regular pack 2.2 in the nominal 12.9 A constant-current group. The observed daily medians are close to 12.9 A at the start of the represented period and rise to approximately 13.8 A in the later represented dates. Preserve these as measured daily statistics; this summary alone does not establish a change in the documented operating protocol, its cause, or a sensor issue.
+
+This is a daily-summary audit of qualifying regular-discharge records only. The 40 represented dates do not establish that no other activity occurred on dates absent from this filtered summary. The output does not establish capacity fade, SOH ground truth, failure/EOL labels, or RUL target validity.
