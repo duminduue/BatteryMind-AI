@@ -332,3 +332,18 @@ The local daily aggregation of regular discharge records (`mode=-1.0`, `mission_
 The dataset documentation lists regular pack 1.0 in the nominal 16.0 A constant-current group. The observed daily medians are above 16 A in the supplied summary. Preserve the distinction between documented nominal protocol and measured current; this difference alone does not establish a protocol deviation, sensor error, or abnormal operating condition.
 
 This is a daily-summary audit of qualifying regular-discharge records only. The 11 represented dates do not establish that no other activity occurred on dates absent from this filtered summary. The output does not establish capacity fade, SOH ground truth, failure/EOL labels, or RUL target validity.
+
+
+### Twelfth measurement-level inspection: regular battery31.csv (pack 3.1)
+
+The local daily aggregation of regular discharge records (`mode=-1.0`, `mission_type=1.0`, non-empty `current_load`) for `regular_alt_batteries/battery31.csv` produced:
+
+- 49 represented discharge dates.
+- Date range: 1 August 2022 to 12 October 2022.
+- Daily median current range: approximately 12.678–13.759 A.
+- First three represented dates: 1 August (4,159 samples; median 12.678 A), 3 August (7,859; 13.003 A), and 4 August (7,509; 12.854 A).
+- Last three represented dates: 10 October (7,229; 13.756 A), 11 October (4,317; 13.759 A), and 12 October (4,731; 13.753 A).
+
+The dataset documentation lists regular pack 3.1 in the nominal 12.9 A constant-current group. Most of the observed daily medians are near this nominal value, with the supplied daily range extending to approximately 13.76 A. Preserve the distinction between documented nominal protocol and measured current; the observed variation alone does not establish a protocol deviation or sensor issue.
+
+This is a daily-summary audit of qualifying regular-discharge records only. The 49 represented dates do not establish that no other activity occurred on dates absent from this filtered summary. The output does not establish capacity fade, SOH ground truth, failure/EOL labels, or RUL target validity.
