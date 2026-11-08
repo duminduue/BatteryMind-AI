@@ -6,6 +6,7 @@ This index summarises the first eight screened studies. These are structured scr
 
 - [Oyewole et al. (2025) — DG-PNUTS](2025-oyewole-dg-pnuts.md)
 - [Physics-driven prior + heteroscedastic GPR (2026)](2026-physics-prior-heteroscedastic-gpr.md)
+- [SMoE-LSTM + deep evidential regression (2026)](2026-smoe-lstm-evidential-uq.md)
 
 These two records are **abstract-level analyses** because full text was not accessible during this review. They identify what must be checked in the full article; they are not full-text reviews or reproductions.
 
