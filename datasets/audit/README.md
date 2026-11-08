@@ -42,7 +42,20 @@ The first 3,000 characters of the CSV and a row-level completeness summary were 
 - Observed mode codes: `-1.0`, `0.0`, `1.0`.
 - Observed mission type codes: `0.0`, `1.0`.
 
-**Interpretation limits:** The meanings of mode and mission-type codes have not yet been verified against the dataset documentation. The first file inspection does not establish that all 26 files have the same schema, nor does it establish capacity, SOH, EOL or RUL labels. Sparse load-related columns may represent different phases of the mission or missing measurements; this needs investigation before imputation or feature selection.
+#### Preliminary observed value ranges
+
+From the user's local scan of `battery00.csv`:
+
+| Column | Minimum | Maximum |
+|---|---:|---:|
+| `voltage_charger` | -0.060 | 9.176 |
+| `temperature_battery` | 0.000 | 102.308 |
+| `voltage_load` | -0.027 | 8.703 |
+| `current_load` | 0.150 | 19.391 |
+
+These are raw observed extrema, not validated physical operating limits. The small negative voltage values and the maximum battery-temperature reading of 102.308 require investigation against the data documentation and neighbouring samples before deciding whether they are sensor offsets, transient events, outliers or data-quality problems. Units should also be confirmed from the official documentation.
+
+**Interpretation limits:** The meanings of mode and mission-type codes have not yet been verified. The first file inspection does not establish that all 26 files have the same schema, nor does it establish capacity, SOH, EOL or RUL labels. Sparse load-related columns may represent different phases of the mission or missing measurements; this needs investigation before imputation or feature selection.
 
 ## Next Step
 
