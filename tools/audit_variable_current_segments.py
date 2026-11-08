@@ -37,6 +37,10 @@ def parse_args() -> argparse.Namespace:
         help="Maximum deviation in amperes from the plateau's first sample (default: 0.30)",
     )
     parser.add_argument(
+        "--max-gap-s", type=float, default=2.0,
+        help="Split a candidate plateau when adjacent sample times differ by more than this many seconds (default: 2.0)",
+    )
+    parser.add_argument(
         "--output-dir", default="segment_audit",
         help="Directory for segment-level and pack-summary CSV outputs",
     )
@@ -64,7 +68,7 @@ def get_time(value: str) -> float | None:
         return None
 
 
-def flush_segment(pack: str, day: str, samples: list[tuple[float, float]], output: list[dict]) -> None:
+def flush_segment(pack: str, day: str, samples: list[tuple[float, float]], output: list[dict], boundary_after: str) -> None:
     if not samples:
         return
     currents = [item[1] for item in samples]
@@ -86,10 +90,12 @@ def flush_segment(pack: str, day: str, samples: list[tuple[float, float]], outpu
         "current_min_A": round(min(currents), 4),
         "current_max_A": round(max(currents), 4),
         "current_range_A": round(max(currents) - min(currents), 4),
+        "max_deviation_from_first_A": round(max(abs(value - currents[0]) for value in currents), 4),
+        "boundary_after": boundary_after,
     })
 
 
-def audit_pack(archive: zipfile.ZipFile, pack: str, tolerance: float) -> list[dict]:
+def audit_pack(archive: zipfile.ZipFile, pack: str, tolerance: float, max_gap_s: float) -> list[dict]:
     path = f"battery_alt_dataset/regular_alt_batteries/battery{pack.replace('.', '')}.csv"
     try:
         stream = archive.open(path)
@@ -103,6 +109,7 @@ def audit_pack(archive: zipfile.ZipFile, pack: str, tolerance: float) -> list[di
     anchor_current: float | None = None
     previous_time: float | None = None
     previous_day = ""
+    pending_boundary = "start_of_filtered_discharge"
 
     with stream:
         reader = csv.DictReader(io.TextIOWrapper(stream, encoding="utf-8-sig", newline=""))
@@ -114,7 +121,7 @@ def audit_pack(archive: zipfile.ZipFile, pack: str, tolerance: float) -> list[di
         for row in reader:
             if not (get_mode(row.get("mode", "")) and get_mission(row.get("mission_type", ""))):
                 if current_segment:
-                    flush_segment(pack, segment_day, current_segment, segments)
+                    flush_segment(pack, segment_day, current_segment, segments, "mission_or_mode_change")
                     current_segment = []
                 anchor_current = None
                 previous_time = None
@@ -125,7 +132,7 @@ def audit_pack(archive: zipfile.ZipFile, pack: str, tolerance: float) -> list[di
             elapsed = get_time(row.get("time", ""))
             if not raw_current or elapsed is None:
                 if current_segment:
-                    flush_segment(pack, segment_day, current_segment, segments)
+                    flush_segment(pack, segment_day, current_segment, segments, "missing_current_or_time")
                     current_segment = []
                 anchor_current = None
                 previous_time = None
@@ -141,7 +148,7 @@ def audit_pack(archive: zipfile.ZipFile, pack: str, tolerance: float) -> list[di
             # Do not allow a detected plateau to bridge across an invalid row.
             if not math.isfinite(current):
                 if current_segment:
-                    flush_segment(pack, segment_day, current_segment, segments)
+                    flush_segment(pack, segment_day, current_segment, segments, "non_finite_current")
                     current_segment = []
                 anchor_current = None
                 previous_time = None
@@ -151,13 +158,19 @@ def audit_pack(archive: zipfile.ZipFile, pack: str, tolerance: float) -> list[di
             day = (row.get("start_time") or "").split()[0]
             discontinuity = (
                 previous_time is not None
-                and (elapsed <= previous_time or elapsed - previous_time > 2.0)
+                and (elapsed <= previous_time or elapsed - previous_time > max_gap_s)
             )
             new_day = bool(previous_day and day != previous_day)
             changed_level = anchor_current is not None and abs(current - anchor_current) > tolerance
 
             if current_segment and (discontinuity or new_day or changed_level):
-                flush_segment(pack, segment_day, current_segment, segments)
+                if discontinuity:
+                    reason = "time_reversal_or_non_increasing_time" if elapsed <= previous_time else "time_gap"
+                elif new_day:
+                    reason = "date_change"
+                else:
+                    reason = "current_change_beyond_tolerance"
+                flush_segment(pack, segment_day, current_segment, segments, reason)
                 current_segment = []
                 anchor_current = None
 
@@ -170,7 +183,7 @@ def audit_pack(archive: zipfile.ZipFile, pack: str, tolerance: float) -> list[di
             previous_day = day
 
     if current_segment:
-        flush_segment(pack, segment_day, current_segment, segments)
+        flush_segment(pack, segment_day, current_segment, segments, "end_of_file")
 
     return segments
 
@@ -179,6 +192,8 @@ def main() -> None:
     args = parse_args()
     if args.tolerance <= 0:
         raise SystemExit("--tolerance must be greater than zero")
+    if args.max_gap_s <= 0:
+        raise SystemExit("--max-gap-s must be greater than zero")
 
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -186,7 +201,7 @@ def main() -> None:
 
     with zipfile.ZipFile(args.archive) as archive:
         for pack in map(normalise_pack, args.packs):
-            segments = audit_pack(archive, pack, args.tolerance)
+            segments = audit_pack(archive, pack, args.tolerance, args.max_gap_s)
             all_segments.extend(segments)
             durations = [s["duration_estimate_s"] for s in segments]
             print(f"Pack {pack}: {len(segments):,} approximate plateaus")
@@ -208,7 +223,8 @@ def main() -> None:
     fields = [
         "pack", "date", "start_time_s", "end_time_s", "sample_count",
         "duration_estimate_s", "current_median_A", "current_min_A",
-        "current_max_A", "current_range_A",
+        "current_max_A", "current_range_A", "max_deviation_from_first_A",
+        "boundary_after",
     ]
     with segment_path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=fields)
@@ -238,7 +254,9 @@ def main() -> None:
 
     print(f"\nWrote: {segment_path}")
     print(f"Wrote: {summary_path}")
-    print("\nCaution: detected plateaus depend on the tolerance and are not confirmed commanded-load segments.")
+    print(f"\nSegmentation settings: current tolerance={args.tolerance:.3f} A; maximum time gap={args.max_gap_s:.3f} s")
+    print("Boundary reasons are recorded per segment; all detected candidates are retained.")
+    print("Caution: detected plateaus depend on the settings and are not confirmed commanded-load segments.")
 
 
 if __name__ == "__main__":
