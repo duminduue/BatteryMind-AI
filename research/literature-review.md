@@ -1,126 +1,168 @@
-# Literature Review — Initial Evidence Synthesis (2022–2026)
+# Literature Review — Battery SOH and RUL Prediction (2022–2026)
 
-**Search snapshot:** 8 November 2026  
-**Status:** Initial scoping review, not yet a PRISMA systematic review. Search strings, screening criteria, and full-text extraction still need to be completed.  
-**Evidence rule:** The notes below distinguish publisher/index metadata and abstract-level claims from full-text methodological appraisal. Where full text was inaccessible, details are explicitly marked as requiring verification.
+**Review status:** Initial evidence-based screening, 8 November 2026. This is not yet a completed systematic review. Some publisher pages provide abstracts and selected full-text sections; where the full methods or supplementary files were not inspected, the record is explicitly marked as abstract-level.
 
-## 1. Search scope
+## 1. Scope and search concepts
 
-Core themes:
+The review focuses on:
 - Lithium-ion battery state-of-health (SOH) estimation and remaining useful life (RUL) prediction.
-- Physics-informed / physics-guided machine learning and hybrid degradation models.
-- Small-sample and transfer/domain adaptation/generalisation.
-- Predictive uncertainty quantification (UQ), calibration, and prediction intervals.
-- Validation across held-out cells, operating conditions, and datasets.
+- Physics-informed / physics-guided and hybrid physics-data methods.
+- Predictive uncertainty quantification (UQ), interval calibration, and uncertainty decomposition.
+- Early-life prediction, data efficiency, cross-cell evaluation, and operating-condition shift.
 
-Searches used combinations of these terms across publisher pages, PubMed/PMC, IEEE Xplore, and scholarly search indexing. This is an initial discovery pass; it is not an exhaustive database search.
+Search concepts included combinations of: lithium-ion battery, SOH, RUL, physics-informed, physics-guided, Bayesian, Gaussian process, uncertainty quantification, conformal prediction, calibration, cross-cell, domain adaptation, and distribution shift.
 
-## 2. Initial paper set and synthesis
+## 2. Screened studies
 
-### A. Foundations: Bayesian prognosis and physics-informed learning
+### 2.1 Physics-based modelling + ML for degradation diagnostics (2022)
 
-**Pugalenthi et al. (2022), “Remaining Useful Life Prediction of Lithium-Ion Batteries Using Neural Networks with Adaptive Bayesian Learning.”**  
-DOI: https://doi.org/10.3390/s22103803  
-The paper is an early relevant UQ/prognostics reference using neural networks with adaptive Bayesian learning for battery RUL. It provides a useful pre-2024 baseline for probabilistic battery prognosis. The exact network design, uncertainty outputs, dataset split, and calibration evaluation must be extracted from the full text before making detailed comparisons.
+**Title:** Integrating physics-based modeling and machine learning for degradation diagnostics of lithium-ion batteries.  
+**Venue:** Energy Storage Materials, 50 (2022), 668–695.  
+**DOI:** https://doi.org/10.1016/j.ensm.2022.05.047
 
-**Nascimento et al. (2023), “A framework for Li-ion battery prognosis based on hybrid Bayesian physics-informed neural networks.”**  
-DOI: https://doi.org/10.1038/s41598-023-33018-0  
-This work explicitly combines Bayesian and physics-informed neural-network ideas for battery prognosis. It is important evidence that physics-informed modelling and Bayesian uncertainty are not a new combination in this domain. Full-text extraction is required for the governing equations, uncertainty treatment, dataset and validation protocol.
+**Evidence from publisher abstract:** The study proposes and tests two lightweight physics-informed ML methods for online capacity estimation and diagnosis of primary degradation modes, using limited early-life experimental degradation data. The motivation is that capacity-only SOH does not identify lifecycle stage or degradation modes, while detailed physics-based diagnostics can require long-term cycling data and high computation.
 
-**Wang et al. (2024), “Physics-informed neural network for lithium-ion battery degradation stable modeling and prognosis.” Nature Communications, 15, 4332.**  
-DOI: https://doi.org/10.1038/s41467-024-48779-z  
-The authors describe empirical degradation and state-space equations combined with neural networks to capture degradation dynamics. Their feature extraction uses a short pre-full-charge period. The paper reports a dataset of 55 NCM batteries and validation combined with three other datasets, totalling 387 batteries and 310,705 samples; reported MAPE is 0.87%. The article reports regular, small-sample and transfer experiments. This is a major prior-art reference: a generic “physics-informed battery SOH model that generalises” is not a defensible novelty claim. Full-text review is needed to understand exact split independence, transfer settings, and uncertainty coverage (not established by the abstract).
+**Methodology known from accessible record:** Two lightweight physics-informed ML approaches; degradation-mode diagnosis and capacity estimation. Exact architecture, dataset split, chemistry/cell count, and detailed metrics require full-text extraction.
 
-**“Physics-informed machine learning for battery degradation diagnostics: A comparison of state-of-the-art methods.” Energy Storage Materials, 68 (2024), 103343.**  
-DOI: https://doi.org/10.1016/j.ensm.2024.103343  
-The paper compares physics-informed ML methods for battery degradation diagnostics and discusses use of short-term ageing data to predict long-term degradation/component behaviour. It is a key review/comparison source for defining what counts as physics-informed guidance. The exact compared methods, data and evaluation should be extracted from the full text.
+**Research relevance:** Establishes that combining physics-based information and ML for battery degradation diagnosis predates the current project. Generic "physics + ML" novelty is therefore not defensible.
 
-### B. Generalisation, transfer, and small-data methods
+**Evidence level:** Publisher abstract / metadata.  
+**Source:** https://www.sciencedirect.com/science/article/pii/S2405829722002999
 
-**Chen et al. (2024), “Domain generalization-based state-of-health estimation of lithium-ion batteries.” Journal of Power Sources, 610, 234696.**  
-DOI: https://doi.org/10.1016/j.jpowsour.2024.234696  
-The paper explicitly trains on known domains and predicts on an unknown domain, using source-domain mixing to increase diversity. This directly overlaps with the proposed unseen-domain evaluation. It means domain generalisation cannot be presented as a new idea in this project. Full-text extraction must establish the domain definitions, split protocol, and limits.
+### 2.2 Early RUL uncertainty with Transformer ensemble (2024)
 
-**Chen et al. (2024), “A self-attention knowledge domain adaptation network for commercial lithium-ion batteries state-of-health estimation under shallow cycles.” Journal of Energy Storage, 86, 111197.**  
-DOI: https://doi.org/10.1016/j.est.2024.111197  
-The publisher record describes a shallow-cycle SOH method using self-attention knowledge-domain adaptation and a domain-invariant feature module. This is relevant to partial/limited observations and transfer between domains. Dataset details and the exact adaptation protocol need full-text verification.
+**Authors:** Jijuan Hu and Lifeng Wu.  
+**Title:** Early Uncertainty Quantification Prediction of Lithium-Ion Battery Remaining Useful Life With Transformer Ensemble Model.  
+**Venue:** IEEE Transactions on Transportation Electrification, 10(4), 8618–8629 (2024).  
+**DOI:** https://doi.org/10.1109/TTE.2024.3354302
 
-**“Physics-informed neural networks for small sample state of health estimation of lithium-ion batteries.” Journal of Energy Storage, 122 (2025), 116559.**  
-DOI: https://doi.org/10.1016/j.est.2025.116559  
-The publisher abstract describes a dynamic physical degradation model fused with a neural network (SPINN), with Huber loss and adaptive loss weighting, targeting small-sample SOH estimation. This directly overlaps with data-efficient physics-guided SOH modelling. Extract the precise sample budgets, comparison fairness, and validation splits before drawing conclusions.
+**Evidence from IEEE abstract:** CNN and denoising-autoencoder Transformer features are combined to learn local and global degradation information. A two-stage ensemble training strategy uses stochastic weight averaging and cosine annealing. Quantile regression is used for RUL uncertainty estimation. With the first 80 cycles, the reported MAPE is 9.23% on a similar-distribution primary test set and 10.52% on a dissimilar-distribution secondary test set.
 
-**Li et al. (2025), “A cross-material lithium-ion battery state of health estimation method based on three-stage domain adaptation.” Energy (2025), 139376.**  
-DOI: https://doi.org/10.1016/j.energy.2025.139376  
-The publisher record describes a three-stage transfer-learning framework, health features from 25% SOC segments, and an interpolated domain for adaptation. It reports 0.75% RMSE with 5% target-domain labels. This is relevant evidence for cross-material transfer and low-label adaptation; exact test conditions and reproducibility need full-text checking.
+**Important limitation for our review:** The accessible IEEE record does not expose the complete dataset identity, detailed split design, interval calibration metrics, or full ablation tables. These must be checked in the full paper before making stronger claims.
 
-### C. Joint SOH/RUL and multi-task physics-informed modelling
+**Research relevance:** Early-life RUL, distribution mismatch, and quantile-based uncertainty are already studied. Our work must go beyond simply applying quantile regression to battery RUL.
 
-**“Physics-informed neural network for co-estimation of state of health, remaining useful life, and short-term degradation path in Lithium-ion batteries.” Applied Energy, 398 (2025), 126427.**  
-DOI: https://doi.org/10.1016/j.apenergy.2025.126427  
-The publisher record describes a gated multi-task framework for SOH, RUL and short-term degradation-path prediction, using a simplified transformer and output derivatives for physical insight. Joint SOH/RUL physics-informed prediction is therefore already represented in recent work. The exact dataset and validation design need full-text extraction.
+**Evidence level:** Publisher abstract and metadata.  
+**Source:** https://ieeexplore.ieee.org/document/10400491/
 
-**Zhang et al. (2026), “A time series physics-informed neural network framework for the state of health estimation of lithium-ion batteries.” Journal of Energy Storage (article 119549; published 10 January 2026).**  
-DOI: https://doi.org/10.1016/j.est.2025.119549  
-The abstract describes a dual-network time-series PINN, time-series feature extraction, and adaptive weighting of loss terms, evaluated on three public datasets. This reinforces that time-series PINN SOH estimation is established prior art.
+### 2.3 Physics-guided prior + heteroscedastic GPR (2026)
 
-### D. Uncertainty quantification and calibration under shift
+**Authors:** Jianqiu Wang, Yongtai He, Dongling Pu, and Xiaodan Wang.  
+**Title:** Lithium-ion battery remaining useful life prediction via physics-driven prior and heteroscedastic Gaussian process regression.  
+**Venue:** Journal of Electronic Measurement and Instrumentation, 40(1), 102–109 (2026); online 27 March 2026 according to the journal record.
 
-**“Remaining Useful Life Prediction and Uncertainty Quantification with Multi-Branch Deep Networks and Probabilistic Calibration.” 2025 IEEE International Conference on Sensing, Diagnostics, Prognostics, and Control (conference held 21–23 November 2025; IEEE record added 28 January 2026).**  
-DOI: https://doi.org/10.1109/SDPC68151.2025.11347806  
-The IEEE abstract describes CNN/BiLSTM/Transformer feature fusion, snapshot ensembles and Monte Carlo dropout for uncertainty, and conformal prediction intervals. It reports experiments on C-MAPSS and A123 lithium-ion battery data. This is direct evidence that deep-network UQ and conformal intervals have already been applied to battery RUL. Full-text review is required to inspect battery-specific results and calibration assumptions.
+**Evidence from journal abstract:** A three-segment empirical capacity-degradation model supplies a physics-based prior. A two-stage heteroscedastic GPR models residual mean and input-dependent variance. A TreeBagger random-forest regressor refines the mean, and beta calibration scales prediction intervals. The study reports leave-one-battery-out evaluation on NASA B0005, B0006, B0007, and B0018; reported R² exceeds 0.93 for all cells, while nominal 90% interval coverage is reported between 70% and 92%, with MPIW 0.085–0.10 Ah.
 
-**“Towards trustworthy lithium-ion battery remaining useful life prediction with uncertainty quantification.” Journal of Energy Storage, 167 (2026), 122408.**  
-DOI: https://doi.org/10.1016/j.est.2026.122408  
-The abstract describes an SMoE-LSTM approach with evidential regression using a normal-inverse-gamma prior, uncertainty decomposition and prediction intervals, validated on the MIT-Stanford dataset. This directly overlaps with trustworthy RUL prediction and UQ. Exact calibration protocol and any distribution-shift evaluation require full-text review.
+**Critical interpretation:** The reported 70–92% coverage range is not uniformly equal to the nominal 90% level. The exact calibration procedure, whether calibration data are independent of test cells, and per-cell results must be checked in the full paper. The abstract's claim of "reliable 90% coverage" should not be repeated without that check.
 
-**Wu et al. (2026), “Uncertainty-Aware Early Battery Life Prediction with Composite-Kernel Gaussian Process Regression and Conformalized Adaptive Intervals.” Algorithms, 19(7), 535.**  
-DOI: https://doi.org/10.3390/a19070535  
-The paper evaluates ten UQ configurations for early-cycle RUL prediction using 124 MIT-Stanford cells. It compares Bayesian UQ, split conformal prediction, jackknife+, bootstrap and conformalized adaptive intervals. The abstract reports a primary test and a secondary test collected one year later, with empirical interval coverage under the shift. This is particularly relevant to early-life, small-data uncertainty evaluation. Full-text review must verify whether the shifted test protocol is strictly independent and how calibration data are allocated.
+**Research relevance:** This is a direct and recent overlap with physics priors, heteroscedastic uncertainty, and leave-one-battery-out validation on NASA cells. It strongly narrows the space for a generic physics-guided + UQ contribution.
 
-**“A Probabilistic Data-Driven Ensemble Approach for Battery Remaining Useful Life (RUL) Prognostics.” Batteries (2026), 12(10), 390.**  
-Publisher page: https://www.mdpi.com/2313-0105/12/10/390  
-The abstract describes adaptive ensemble weighting and epistemic/aleatoric uncertainty across NASA PCoE, CALCE, MIT and XJTU data. It reports that temperature-scaling calibration transferred imperfectly to unseen cells (reported PICP@95% falling to 78.1% in that experiment). This is especially relevant evidence that calibration can deteriorate across cells. Verify full metadata and detailed protocol before citing specific numeric claims in a manuscript.
+**Evidence level:** Journal abstract and issue metadata.  
+**Source:** https://jemi.etmchina.com/jemien/article/issue/2026_40_1
 
-### E. Very recent direct overlap with the original project idea
+### 2.4 Physics-informed Bayesian sampling for battery prognostics (2025)
 
-**Chen et al. (2026), “Physics-Consistent Domain-Aware SOH Estimation for Cross-Cell Battery Health Prediction.” Batteries, 12(9), 340.**  
-DOI: https://doi.org/10.3390/batteries12090340  
-This paper combines physics-guided features, domain-aware alignment, monotonicity-constrained LightGBM and split conformal uncertainty quantification. It uses NASA B0005, B0006 and B0007 with leave-one-cell-out evaluation. Importantly, the abstract itself notes that uncertainty intervals are not fully calibrated under severe domain shift and calls for broader validation on larger, more heterogeneous datasets. This is a very close overlap with the originally proposed combination of physics guidance, cross-cell generalisation and conformal UQ. Therefore the original broad project framing is not novel.
+**Title:** Uncertainty-aware deep learning with physics-informed bayesian sampling for lithium-ion battery prognostics.  
+**Venue:** Applied Energy, 402, Part A, article 126880 (15 December 2025).  
+**DOI:** https://doi.org/10.1016/j.apenergy.2025.126880
 
-**Rizanov et al. (2026), “Toward Trustworthy and Transferable SOH/RUL Estimation for Lithium-Ion Batteries: A Critical Review and Multi-Fidelity Validation Framework from Laboratory Cells to Real-World Packs.” Batteries, 12(7), 255.**  
-DOI: https://doi.org/10.3390/batteries12070255  
-This review synthesizes 176 works and frames trustworthiness in terms of observability, robustness, uncertainty calibration, transferability and deployment feasibility. It proposes a multi-fidelity validation path from cells to packs and fleet operation. Its existence means the project must not claim that trustworthy/transferable validation or cell-to-pack validation is itself an unexplored topic. The specific review taxonomy and proposed framework should be extracted in detail.
+**Evidence from publisher abstract/highlights:** The work combines Bayesian multi-source domain adaptation with a physics-informed NUTS sampling algorithm to respond to operational changes. It reports explainable health indicators from selected charge-data segments and addresses heterogeneous training data and different battery chemistries.
 
-## 3. What the evidence says so far
+**Information still required:** Authors, exact dataset names and sizes, split protocol, chemistry-specific results, uncertainty calibration metrics, computational cost, and ablation details must be verified from the full article.
 
-1. Physics-informed battery SOH and degradation modelling is well established by 2023–2026.
-2. Cross-cell/domain generalisation and transfer learning are already active research directions.
-3. Bayesian, ensemble, evidential, Gaussian-process and conformal uncertainty methods have already been applied to battery SOH/RUL tasks.
-4. Some 2026 studies directly combine physics-guided estimation, domain adaptation/generalisation and uncertainty quantification.
-5. Recent evidence explicitly reports calibration weaknesses under severe cell/domain shift. This is a promising *specific evaluation problem*, not proof that no one has solved it.
-6. A broad proposal to “combine physics-guided AI + uncertainty + unseen operating conditions” would be insufficiently differentiated.
+**Research relevance:** Physics-informed Bayesian UQ and domain adaptation across chemistry/operating variation are already active topics by 2025. A proposal to merely combine those components would overlap substantially.
 
-## 4. Candidate refined research direction
+**Evidence level:** Publisher abstract/highlights.  
+**Source:** https://www.sciencedirect.com/science/article/pii/S0306261925016101
 
-A defensible next step is to investigate an **independent, controlled benchmark of predictive-interval calibration and degradation-physics consistency under cell-held-out and cross-dataset shift, with explicit low-data budgets**.
+### 2.5 History-agnostic Bayesian neural network for SOH/RUL (2026)
 
-Potential research question:
-> How do physics-guided constraints and alternative uncertainty-calibration strategies affect SOH/RUL error, interval coverage, interval width, and physical consistency when training data are limited and evaluation cells or datasets are held out?
+**Authors:** Elaheh Sadat Ahmadi Mousavi, Farzaneh Abdollahi, Farshad Barazandeh, Farschad Torabi, and Amin Hajizadeh.  
+**Title:** History-Agnostic Lithium-Ion Batteries State of Health and Remaining Useful Life Estimation Using Fusion-Based Bayesian Neural Network.  
+**Venue:** IET Renewable Power Generation; first published 22 June 2026.  
+**DOI:** https://doi.org/10.1049/rpg2.70297
 
-This should initially be treated as an empirical benchmarking question, not as a claim of a new algorithm. A methodological contribution can be proposed only after full-text review establishes a precise unresolved limitation.
+**Evidence from publisher full-text page (abstract):** Four new dV/dt-based health indicators are fused with six established indicators from a single charge-discharge cycle. Two BNNs separately predict SOH and RUL and provide uncertainty estimates. Validation uses the Oxford battery degradation dataset and leave-one-out cross-validation. The abstract reports SOH R² above 0.998 and MAE below 0.002 across test cells, and direct RUL R² above 0.97 with MAPE as low as 8.5%.
 
-## 5. Major limitations of this initial review
+**Research relevance:** Single-cycle / history-agnostic prediction and Bayesian uncertainty are relevant alternatives to long-history sequence models. The Oxford dataset and leave-one-out protocol are important to examine. The reported scores must be interpreted in light of sample size, cell count, target definition, and split design.
 
-- Discovery searches are not exhaustive and have not yet been run as a documented multi-database systematic search.
-- Some papers were assessed from publisher abstracts or indexed records because full text was inaccessible.
-- The 2026 literature is rapidly developing; online-first and issue publication dates can differ.
-- Numeric results are author-reported and are not directly comparable across datasets, labels, splits or metrics.
-- No paper should be used to substantiate a detailed implementation claim until its full methods and supplementary information are checked.
+**Evidence level:** Publisher full-text page, including abstract and introduction; complete method/results still need detailed extraction.  
+**Source:** https://ietresearch.onlinelibrary.wiley.com/doi/10.1049/rpg2.70297
 
-## 6. Next review tasks
+### 2.6 Trustworthy RUL with SMoE-LSTM and evidential uncertainty (2026)
 
-1. Retrieve and read full text for the highest-priority papers: Wang et al. (2024); Chen et al. (2024, domain generalisation); Nascimento et al. (2023); Chen et al. (2026, physics-consistent domain-aware); Wu et al. (2026, conformal adaptive intervals); and the 2026 trustworthy RUL UQ paper.
-2. Populate every row of the literature matrix with exact datasets, chemistry, cell counts, split protocol, UQ method, and metrics.
-3. Search Scopus/Web of Science/IEEE Xplore/ScienceDirect/SpringerLink/Google Scholar with a saved search protocol and date.
-4. Trace references and citations backward/forward to identify omitted studies from 2022 and 2023.
-5. Only then freeze the research gap and experimental protocol.
+**Title:** Towards trustworthy lithium-ion battery remaining useful life prediction with uncertainty quantification.  
+**Venue:** Journal of Energy Storage, volume 167, article 122408 (30 July 2026).  
+**DOI:** https://doi.org/10.1016/j.est.2026.122408
+
+**Evidence from publisher record and accessible article text:** A sparsely gated mixture-of-experts LSTM (SMoE-LSTM) models multi-stage degradation. Deep evidential regression with a Normal-Inverse-Gamma prior is used to produce RUL and separate aleatoric/epistemic uncertainty in one forward pass. The study reports validation on the MIT-Stanford dataset, average RMSE 16.11 and R² 0.9821, and compares its efficiency with sampling/ensemble UQ approaches.
+
+**Research relevance:** Efficient uncertainty decomposition and adaptive expert models are already explored. A proposed contribution based solely on fast uncertainty output or aleatoric/epistemic decomposition would not be novel.
+
+**Evidence level:** Publisher record and accessible article text; complete experimental tables and dataset details still need verification.  
+**Source:** https://www.sciencedirect.com/science/article/pii/S2352152X26020724
+
+### 2.7 Physics-informed explainable hybrid SOH/RUL (2026)
+
+**Authors:** Plamen Stanchev and Nikolay Hinov.  
+**Title:** Physics-Informed Explainable Machine Learning for Hybrid State of Health and Remaining Useful Life Estimation of Lithium-Ion Batteries.  
+**Venue:** Batteries, 12(10), 401 (published 6 October 2026).  
+**DOI:** https://doi.org/10.3390/batteries12100401
+
+**Evidence from publisher abstract:** A multi-cell degradation simulation represents capacity fade, resistance growth, thermal/operational stress, and nonlinear ageing acceleration. Hybrid SOH combines capacity- and resistance-related health information. EOL/RUL use an 80% capacity-retention criterion. Evaluation includes cell-wise and leave-one-cell-out validation; right-censored cells are excluded from exact RUL error calculations. The paper reports simulation-based results and explicitly states that independent experimental validation is still needed.
+
+**Research relevance:** Hybrid SOH, physics-informed explainability, leave-one-cell-out tests, and simulated distribution shift are already covered. The simulation-only nature and lack of independent experimental validation are explicit limitations, but do not by themselves establish a new research gap for our project.
+
+**Evidence level:** Publisher abstract.  
+**Source:** https://www.mdpi.com/2313-0105/12/10/401
+
+### 2.8 Short-transient SOH with probabilistic physics-informed trend model (2026)
+
+**Title:** A two-stage probabilistic framework with validity screening and physics-informed trend modeling for lithium-ion battery health estimation from short discharge transients.  
+**Venue:** Journal of Energy Storage, volume 169, article 122763 (15 August 2026).  
+**DOI:** https://doi.org/10.1016/j.est.2026.122763
+
+**Evidence from publisher abstract:** The framework estimates SOH from short initial discharge-transient windows. It uses a two-stage validity screen and a physics-informed Gaussian process with a linear trend plus residual process. Out-of-distribution inflation widens uncertainty intervals under distribution shift. The publisher highlights leakage-safe cross-cell testing and reports accuracy, uncertainty, and prediction availability.
+
+**Research relevance:** Short-window SOH estimation, validity screening, physics-informed probabilistic trends, OOD interval widening, and leakage-safe cross-cell evaluation are already being addressed. This is a particularly close overlap with a generic proposal about cross-cell calibrated uncertainty.
+
+**Evidence level:** Publisher abstract/highlights.  
+**Source:** https://www.sciencedirect.com/science/article/pii/S2352152X26024278
+
+## 3. Synthesis: what is already established
+
+The screened evidence indicates that the following are not novel in isolation:
+- Physics-informed / physics-guided ML for battery capacity, SOH, degradation diagnosis, or RUL.
+- Bayesian, Gaussian-process, ensemble, quantile, and evidential uncertainty methods.
+- Early-life battery RUL prediction with uncertainty.
+- Cross-cell or leave-one-cell/battery-out evaluation.
+- Domain adaptation or evaluation under distribution mismatch.
+- Physics-guided probabilistic trend models and interval widening under OOD conditions.
+- Explainable and hybrid SOH/RUL frameworks.
+
+## 4. Candidate research opportunities — hypotheses, not established gaps
+
+Potentially worthwhile directions to test against a broader review include:
+
+1. **Calibration under realistic grouped shift:** Compare uncertainty methods using strict cell-held-out and condition-held-out protocols, while distinguishing interpolation, extrapolation, and cross-dataset transfer. Check whether the calibration data are genuinely independent of test cells.
+2. **Data-efficiency versus calibration trade-off:** Measure how performance and interval calibration change as the number of training cells or early-life cycles is reduced. This requires enough independent cells; a large number of cycles from a few cells is not a substitute.
+3. **Selective prediction / abstention:** Investigate whether models can identify inputs for which estimates are unreliable and abstain or widen intervals, evaluated with coverage-risk and availability measures. First establish how recent battery papers handle this.
+4. **Dataset shift and label harmonisation:** Study how differing chemistry, protocol, sampling, and EOL definitions affect claims of cross-dataset generalisation. This may be a methodological contribution if it exposes a reproducible evaluation failure.
+
+None of these is claimed as novel yet. Search more broadly and inspect full papers before selecting one.
+
+## 5. Major review limitations
+
+- This is a targeted initial screening, not a PRISMA-compliant systematic review.
+- Search results and accessible publisher pages were used; some publisher full texts were blocked or only abstracts were accessible.
+- Several papers require full-text extraction of datasets, cell counts, splits, metrics, calibration protocols, and ablations.
+- No claim is made that all relevant 2022–2026 papers have been found.
+- The research gap remains **open**.
+
+## 6. Immediate next actions
+
+1. Obtain and read full texts for the eight screened studies where accessible.
+2. Extract exact dataset identities, cell counts, chemistry, target definitions, train/validation/test protocol, and calibration metrics.
+3. Search additional 2022–2026 studies on conformal prediction, domain generalisation, early-life RUL, and cross-dataset validation.
+4. Audit NASA and CALCE files before locking the experimental design.
+5. Write a bounded gap statement only after evidence comparison is complete.
