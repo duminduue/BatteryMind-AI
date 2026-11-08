@@ -150,3 +150,14 @@ Daily statistics were calculated only from rows where `mode=-1.0`, `mission_type
 The observed stages broadly support the documented three-stage protocol for pack 3.2 (nominal sequence 16 A → 14.3 A → 7.5 A). However, measured daily medians are not identical to nominal protocol values. This is an empirical correspondence, not proof of the exact transition trigger or capacity threshold. The transition dates should be checked against the original protocol and capacity records before making stronger claims.
 
 The daily aggregation is descriptive. It does not establish SOH, capacity fade, or EOL labels, and the 20 February mean is influenced by the transition between current regimes.
+
+
+#### Closer inspection of the 20 February load-stage change
+
+A follow-up scan of regular discharge records (`mode=-1.0`, `mission_type=1.0`) on 20 February found:
+
+- The final observed high-load session before the lower-current regime included readings around 14.91 A, ending at relative time 1,052,033.776 s.
+- The next observed discharge session began at relative time 1,063,033.437 s with 7.616 A; subsequent samples were around 7.60 A.
+- The records between these sessions include low-current/near-zero-voltage transition or connection readings (approximately 0.46–0.50 A with -0.026 V), which should not be treated as the new sustained load level.
+
+This supports a change between discharge sessions from the approximately 15 A measured regime to the approximately 7.6 A measured regime. It does not show an instantaneous current step within one continuous discharge session. The exact operational trigger for the change (including whether it occurred at the documented capacity threshold) is not established by this daily current scan alone.
