@@ -174,3 +174,6 @@ The local daily aggregation of regular discharge records (`mode=-1.0`, `mission_
 The observed pattern is consistent with a change from a higher-current stage to a lower-current stage. The dataset documentation lists pack 2.2 among the two-stage recommissioned packs with nominal sequence 16 A → 12.9 A. The measured medians (about 13.5–13.7 A in the lower stage) do not exactly equal the nominal protocol value; report nominal protocol and measured current separately.
 
 The supplied daily summary contains no listed discharge dates between 12 December 2022 and 10 January 2023. This is a gap in the displayed daily discharge records, not evidence that the pack was inactive throughout that interval. This summary alone does not establish transition trigger, capacity threshold, SOH, or EOL labels.
+
+
+A subsequent date-coverage check for `battery02.csv` confirmed that regular-discharge records occur on 27 distinct dates, with first date 26 November 2022 and last date 22 January 2023. The interval between these endpoints is therefore not continuously represented by regular-discharge dates in this filtered summary.
