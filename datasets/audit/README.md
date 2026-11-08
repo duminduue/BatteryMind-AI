@@ -32,7 +32,7 @@ Inventory: [NASA_Randomized_inventory.csv](NASA_Randomized_inventory.csv)
 
 ### First measurement-level inspection: regular battery00.csv
 
-The first 3,000 characters of the CSV and a row-level completeness summary were inspected directly from the ZIP archive without extracting the full archive.
+The CSV was sampled and scanned directly from the ZIP archive without extracting the full archive.
 
 - Rows: 1,101,244
 - Columns: 10
@@ -44,7 +44,7 @@ The first 3,000 characters of the CSV and a row-level completeness summary were 
 
 #### Preliminary observed value ranges
 
-From the user's local scan of `battery00.csv`:
+From the local scan of `battery00.csv`:
 
 | Column | Minimum | Maximum |
 |---|---:|---:|
@@ -53,12 +53,18 @@ From the user's local scan of `battery00.csv`:
 | `voltage_load` | -0.027 | 8.703 |
 | `current_load` | 0.150 | 19.391 |
 
-These are raw observed extrema, not validated physical operating limits. The small negative voltage values and the maximum battery-temperature reading of 102.308 require investigation against the data documentation and neighbouring samples before deciding whether they are sensor offsets, transient events, outliers or data-quality problems. Units should also be confirmed from the official documentation.
+These are raw observed extrema, not validated physical operating limits. Units should be confirmed from the dataset documentation.
+
+#### Investigation of the maximum battery-temperature event
+
+The maximum `temperature_battery` value (102.308) was not an isolated single-row spike. The neighbouring records supplied from the local scan show a sustained sequence from approximately 101.4 to 102.3, then a gradual decrease after the maximum. During the rising sequence, `current_load` is approximately 16.3–16.5 and `voltage_load` declines from about 5.34 to 4.92. The MOSFET and resistor temperatures in the same records are around 31–33.
+
+This co-occurrence is an observation, not a confirmed physical explanation. Before classifying it as a real thermal event or sensor fault, verify the temperature units, sensor placement, mode-code meaning, mission protocol and original dataset documentation. Do not silently remove or cap this region as an outlier.
 
 **Interpretation limits:** The meanings of mode and mission-type codes have not yet been verified. The first file inspection does not establish that all 26 files have the same schema, nor does it establish capacity, SOH, EOL or RUL labels. Sparse load-related columns may represent different phases of the mission or missing measurements; this needs investigation before imputation or feature selection.
 
 ## Next Step
 
-Inspect the official documentation and representative CSV files from each battery group. Establish the meanings of coded fields, measurement units, pack/cell lineage, operating conditions and whether capacity/EOL labels can be derived defensibly.
+Inspect the dataset documentation and representative CSV files from each battery group. Establish the meanings of coded fields, measurement units, pack/cell lineage, operating conditions and whether capacity/EOL labels can be derived defensibly.
 
 **Important:** Archive file counts are not battery-cell counts. The inventory and single-file sample do not establish dataset suitability or scientific independence.
