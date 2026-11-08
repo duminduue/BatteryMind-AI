@@ -207,3 +207,16 @@ The local daily aggregation of regular discharge records (`mode=-1.0`, `mission_
 The dataset documentation lists pack 3.3 among the two-stage recommissioned packs with nominal current sequence 16 A → 12.9 A. The observed pattern is consistent with a transition from a higher-current regime to a lower-current regime. The lower-stage daily medians (about 13.5–13.9 A) are higher than the nominal 12.9 A; preserve this distinction rather than relabeling measured current as nominal protocol current.
 
 The supplied output contains a gap in represented discharge dates between 12 December 2022 and 10 January 2023. This is a gap in the filtered daily summary, not evidence that the pack was inactive throughout that interval. This aggregation does not establish the transition trigger, capacity threshold, SOH, or EOL labels.
+
+
+### Sixth measurement-level inspection: recommissioned battery32.csv
+
+The supplied daily aggregation of regular discharge records (`mode=-1.0`, `mission_type=1.0`, non-empty `current_load`) for `recommissioned_batteries/battery32.csv` shows:
+
+- 19–25 October 2022: daily median current approximately 16.279–16.679 A.
+- 26 October 2022: median 14.818 A, consistent with a mixed/transition day.
+- 27 October–14 November 2022 (dates represented in the supplied output): daily median current approximately 14.919–15.322 A.
+
+The dataset documentation lists pack 3.2 among the two-stage recommissioned packs with nominal sequence 16 A → 14.3 A. The observed daily pattern broadly supports a shift from a higher-current regime to a lower-current regime, although the lower-stage measured medians are approximately 14.8–15.3 A rather than exactly 14.3 A. Nominal protocol values and measured current statistics must remain distinct.
+
+The supplied output ends on 14 November 2022; it does not establish the pack's final discharge date or full lifetime. The 26 October daily median suggests a mixed/transition day but does not identify the exact transition time or capacity trigger. This daily summary does not establish SOH or EOL labels.
