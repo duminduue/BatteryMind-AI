@@ -161,3 +161,16 @@ A follow-up scan of regular discharge records (`mode=-1.0`, `mission_type=1.0`) 
 - The records between these sessions include low-current/near-zero-voltage transition or connection readings (approximately 0.46–0.50 A with -0.026 V), which should not be treated as the new sustained load level.
 
 This supports a change between discharge sessions from the approximately 15 A measured regime to the approximately 7.6 A measured regime. It does not show an instantaneous current step within one continuous discharge session. The exact operational trigger for the change (including whether it occurred at the documented capacity threshold) is not established by this daily current scan alone.
+
+
+### Third measurement-level inspection: recommissioned battery02.csv
+
+The local daily aggregation of regular discharge records (`mode=-1.0`, `mission_type=1.0`, non-empty `current_load`) for `recommissioned_batteries/battery02.csv` produced:
+
+- 26 November–3 December 2022: daily median current 16.303–16.526 A.
+- 4–11 December 2022: daily median current 13.484–13.644 A.
+- 11–22 January 2023 (dates with records shown in the supplied output): daily median current 13.658–13.719 A.
+
+The observed pattern is consistent with a change from a higher-current stage to a lower-current stage. The dataset documentation lists pack 2.2 among the two-stage recommissioned packs with nominal sequence 16 A → 12.9 A. The measured medians (about 13.5–13.7 A in the lower stage) do not exactly equal the nominal protocol value; report nominal protocol and measured current separately.
+
+The supplied daily summary contains no listed discharge dates between 12 December 2022 and 10 January 2023. This is a gap in the displayed daily discharge records, not evidence that the pack was inactive throughout that interval. This summary alone does not establish transition trigger, capacity threshold, SOH, or EOL labels.
