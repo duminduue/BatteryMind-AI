@@ -302,3 +302,18 @@ The eight actual CSV filenames in the recommissioned folder encode pack IDs with
 2. Inspect capacity/failure definitions and determine whether capacity reference measurements are available in the archives.
 3. Audit second-life lineage and design pack-level splits that keep related first-life and second-life records together.
 4. Only after these checks, decide which supervised tasks (SOH, RUL, or another prognostic target) are defensible.
+
+
+### Tenth measurement-level inspection: regular battery00.csv (pack 0.0)
+
+The local daily aggregation of regular discharge records (`mode=-1.0`, `mission_type=1.0`, non-empty `current_load`) for `regular_alt_batteries/battery00.csv` produced:
+
+- 14 represented discharge dates.
+- Date range: 22 July 2022 to 9 August 2022.
+- Daily median current range: approximately 16.306–16.918 A.
+- First three represented dates: 22 July (1,668 samples; median 16.306 A), 23 July (8,544; 16.343 A), and 24 July (5,122; 16.406 A).
+- Last three represented dates: 7 August (4,385; 16.918 A), 8 August (3,795; 16.906 A), and 9 August (259; 16.871 A).
+
+The dataset documentation lists regular pack 0.0 in the nominal 16.0 A constant-current group. The observed daily medians are consistently above 16 A in the supplied summary. Preserve the distinction between the documented nominal protocol and measured current; this difference alone does not establish a protocol deviation, sensor error, or abnormal operating condition.
+
+This is a daily-summary audit of qualifying regular-discharge records only. The 14 represented dates do not establish that no other activity occurred on dates absent from this filtered summary. The output does not establish capacity fade, SOH ground truth, failure/EOL labels, or RUL target validity.
