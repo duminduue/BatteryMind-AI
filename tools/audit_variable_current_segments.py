@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import csv
 import io
+import math
 import statistics
 import zipfile
 from collections import Counter
@@ -134,6 +135,17 @@ def audit_pack(archive: zipfile.ZipFile, pack: str, tolerance: float) -> list[di
             try:
                 current = float(raw_current)
             except ValueError:
+                current = float("nan")
+
+            # Treat malformed and non-finite measurements as a real data gap.
+            # Do not allow a detected plateau to bridge across an invalid row.
+            if not math.isfinite(current):
+                if current_segment:
+                    flush_segment(pack, segment_day, current_segment, segments)
+                    current_segment = []
+                anchor_current = None
+                previous_time = None
+                previous_day = ""
                 continue
 
             day = (row.get("start_time") or "").split()[0]
