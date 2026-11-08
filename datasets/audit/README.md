@@ -235,3 +235,12 @@ The supplied daily aggregation of regular discharge records (`mode=-1.0`, `missi
 The dataset documentation lists pack 2.4 among the two-stage recommissioned packs with nominal current sequence 16 A → 9.30 A. Most of the supplied daily summaries are consistent with a higher-current regime followed by a lower-current regime. However, the 14 November daily median returns to approximately 16.58 A between lower-current dates (13 and 15 November). This non-monotonic daily pattern must not be smoothed away or assumed to be an error. It may reflect distinct discharge sessions, a change in operating mission, or another protocol/data feature; session-level inspection and the original experiment log are needed before interpreting the sequence.
 
 The lower-stage measured medians (about 9.55–9.71 A) are above the nominal 9.30 A protocol value. Nominal protocol and measured current must be reported separately. The supplied output ends on 18 January 2023 and does not establish the full lifetime, EOL label, or capacity trigger.
+
+
+A focused first/last-record check of `battery24.csv` on 13–15 November 2022 confirms the unusual daily pattern:
+
+- 13 November: 11,117 regular-discharge samples; first displayed valid load readings are approximately 9.59–9.60 A and final readings approximately 9.93–9.95 A.
+- 14 November: 4,583 samples; first displayed valid load readings are approximately 16.68 A and final readings approximately 16.15 A.
+- 15 November: 11,926 samples; first displayed valid load readings are approximately 9.61 A and final readings approximately 9.96 A.
+
+Thus, the high-current regime is present across the displayed beginning and end of 14 November, while 13 and 15 November show the lower-current regime. This is stronger evidence of a day/session-level return to the high-current regime than the daily median alone, but it still does not establish why the protocol alternated or whether this reflects planned mission scheduling, recommissioning procedure, or another experiment-specific factor. Do not assume a single monotonic 16 A → 9.3 A transition for this pack without checking the original experiment log and all session boundaries.
