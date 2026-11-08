@@ -194,3 +194,16 @@ The supplied daily summary has a gap in represented discharge dates between 12 D
 
 
 A session-level follow-up for 30 November 2022 in `battery12.csv` counted 9,245 regular-discharge samples: 30 below 1 A, 4,257 at or above 16 A, and 4,958 between 8 and 11 A. The first displayed records include approximately 16.52 A after low-current connection readings; the final displayed records are approximately 9.75–9.81 A. This confirms that the daily mean (12.732 A) combines two distinct current regimes rather than representing a single operating current. The count distribution supports a mixed/transition-day interpretation; it does not by itself identify the exact transition time or capacity trigger.
+
+
+### Fifth measurement-level inspection: recommissioned battery33.csv
+
+The local daily aggregation of regular discharge records (`mode=-1.0`, `mission_type=1.0`, non-empty `current_load`) for `recommissioned_batteries/battery33.csv` produced:
+
+- 25 November–2 December 2022: daily median current approximately 16.332–16.628 A.
+- 3–11 December 2022: daily median current approximately 13.497–13.676 A.
+- 11–26 January 2023 (dates represented in the supplied output): daily median current approximately 13.669–13.855 A.
+
+The dataset documentation lists pack 3.3 among the two-stage recommissioned packs with nominal current sequence 16 A → 12.9 A. The observed pattern is consistent with a transition from a higher-current regime to a lower-current regime. The lower-stage daily medians (about 13.5–13.9 A) are higher than the nominal 12.9 A; preserve this distinction rather than relabeling measured current as nominal protocol current.
+
+The supplied output contains a gap in represented discharge dates between 12 December 2022 and 10 January 2023. This is a gap in the filtered daily summary, not evidence that the pack was inactive throughout that interval. This aggregation does not establish the transition trigger, capacity threshold, SOH, or EOL labels.
