@@ -244,3 +244,17 @@ A focused first/last-record check of `battery24.csv` on 13–15 November 2022 co
 - 15 November: 11,926 samples; first displayed valid load readings are approximately 9.61 A and final readings approximately 9.96 A.
 
 Thus, the high-current regime is present across the displayed beginning and end of 14 November, while 13 and 15 November show the lower-current regime. This is stronger evidence of a day/session-level return to the high-current regime than the daily median alone, but it still does not establish why the protocol alternated or whether this reflects planned mission scheduling, recommissioning procedure, or another experiment-specific factor. Do not assume a single monotonic 16 A → 9.3 A transition for this pack without checking the original experiment log and all session boundaries.
+
+
+### Eighth measurement-level inspection: recommissioned battery25.csv
+
+The supplied daily aggregation of regular discharge records (`mode=-1.0`, `mission_type=1.0`, non-empty `current_load`) for `recommissioned_batteries/battery25.csv` shows three apparent current regimes:
+
+- 4–14 February 2023 (dates represented): daily median current approximately 16.173–16.401 A.
+- 15–28 February 2023: daily median current approximately 6.975–7.433 A, broadly consistent with the documented intermediate nominal stage of 7.5 A.
+- 1–2 March 2023: mixed daily summaries (1 March mean 12.337 A, median 14.971 A; 2 March mean 9.962 A, median 7.505 A), consistent with a transition/mixed-regime period that requires session-level inspection.
+- 3–13 March 2023 (dates represented): daily median current approximately 14.993–15.018 A.
+
+The dataset documentation lists pack 2.5 among the three-stage recommissioned packs with nominal sequence 16 A → 7.5 A → 14.3 A, with stage changes associated with approximate capacity thresholds of 2.2 Ah and 2.0 Ah. The observed sequence (about 16.2 A → 7.4 A → 15.0 A) broadly corresponds to those three nominal stages, but the measured medians differ from nominal values, especially in the final stage. Keep protocol currents and measured currents distinct.
+
+The daily aggregation suggests transition periods around 15 February and 1–3 March, but it does not establish exact transition times or verify the capacity thresholds. The 1–2 March means/medians differ substantially, showing why daily means alone can conceal mixed regimes. Session-level analysis and capacity/experiment logs are needed before attributing the transitions to the documented capacity triggers. This summary does not establish SOH or EOL labels.
