@@ -637,3 +637,15 @@ The large difference between 2 full-record gaps and 165 discharge-only gaps is i
 The 2 full-record intervals above the selected 2-second threshold are candidates for closer review, not proof of missing data. The audit output is written locally to `outputs/pack_gap_audit.csv`; it is not a raw measurement file and is not committed here.
 
 This result supports treating the complete `time` sequence as the primary basis for timestamp-continuity checks. Filtered operating-mode subsets should be audited separately and their gaps must not be labelled missing data without checking the intervening full-record rows. This is a single-pack, threshold-dependent audit; it does not establish timestamp quality for the other 25 pack files.
+
+
+#### Inspection of the two complete-record gaps
+
+The original rows within approximately five seconds of each detected gap were inspected in pack 0.0:
+
+- At 7,419.689 s, the preceding records are in charge mode (`mode=1`) at approximately 0.95 s intervals. The next recorded row is at 7,421.694 s in rest mode (`mode=0`). The 2.005 s interval coincides with a charge-to-rest transition.
+- At 24,933.316 s, the records on both sides are in rest mode (`mode=0`), with the next row at 24,935.377 s. The 2.061 s interval occurs during rest.
+
+Neither inspected interval contains a discharge mission; `mission_type` and `current_load` are therefore empty in these rows, as expected outside discharge missions. The gaps are only slightly above the selected 2 s threshold and are candidates for data-acquisition/timing review. The local excerpts do not establish why either interval is longer, nor prove that a measurement was lost. No rows have been removed or imputed.
+
+The evidence is limited to these two intervals in pack 0.0. It should not be generalized to other packs without running the same full-record audit and contextual inspection.
