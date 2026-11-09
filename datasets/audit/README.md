@@ -620,3 +620,20 @@ The 20-second-bin median current summary around the detected interval 10151.363�
 - 10331–10351 s: 19.1226 A
 
 Most bins contained 21 samples; the first partial bin contained 2. The bin medians support a clear step from approximately 17.64 A to 18.31 A at the detected start, followed by a step down to approximately 16.69 A near the detected end. A later step to approximately 19.12 A is also visible. This numerically supports the visual interpretation that this selected Pack 4.0 detection corresponds to a distinct, approximately stable measured-current plateau. Bin aggregation limits transition-time precision; this remains a spot-check rather than validation of every detected segment.
+
+
+### Timestamp-gap audit: regular pack 0.0
+
+The new exploratory tool `tools/audit_operating_mode_gaps.py` was run against `regular_alt_batteries/battery00.csv` (pack 0.0), using a threshold of more than 2 seconds.
+
+- Total records inspected: 1,101,244.
+- Operating-mode counts: charge 503,147; discharge 106,006; rest 492,091.
+- Gaps greater than 2 seconds between consecutive records in the complete, unfiltered time series: 2.
+- These two full-record gaps were 2.005–2.061 seconds (median 2.033 seconds).
+- Gaps greater than 2 seconds between consecutive rows after filtering to regular-discharge mission records (`mode=-1`, `mission_type=1`, non-empty `current_load`): 165.
+
+The large difference between 2 full-record gaps and 165 discharge-only gaps is important: most gaps seen after filtering out charge/rest and other records are not evidence of missing timestamps in the original complete record sequence. They can arise because valid records from other operating modes lie between the retained discharge rows.
+
+The 2 full-record intervals above the selected 2-second threshold are candidates for closer review, not proof of missing data. The audit output is written locally to `outputs/pack_gap_audit.csv`; it is not a raw measurement file and is not committed here.
+
+This result supports treating the complete `time` sequence as the primary basis for timestamp-continuity checks. Filtered operating-mode subsets should be audited separately and their gaps must not be labelled missing data without checking the intervening full-record rows. This is a single-pack, threshold-dependent audit; it does not establish timestamp quality for the other 25 pack files.
