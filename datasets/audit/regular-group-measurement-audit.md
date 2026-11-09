@@ -157,3 +157,31 @@ For the refined segmentation CSV generated with a current tolerance of 0.30 A an
 The pack-level current distributions differ: packs 4.0 and 5.0 have higher segment-current medians than packs 4.1 and 5.1 in these selected duration bands. Within packs 4.1 and 5.1, the median segment current increases across the 40 s, 60 s and 80 s bands in this output. Packs 4.0 and 5.0 do not show the same monotonic pattern.
 
 These are descriptive summaries of algorithmically detected candidate segments. The median is calculated across candidate-segment medians, not across all raw samples, and candidate counts are not independent experimental replicates. Because the segmentation is parameter-sensitive and some selected intervals contain internal current changes, these results must not be interpreted as confirmed commanded-load levels or causal effects of duration on current.
+
+
+### Refined candidate-segment consistency and duration audit
+
+A further local check was run on the refined candidate-segment CSV (current tolerance 0.30 A; maximum adjacent-sample gap 2.0 s). It counted candidate segments whose within-segment measured-current range was at most 0.30 A or 0.60 A, and segments containing at least 10 samples.
+
+| Pack | Total candidates | Current range ≤0.30 A | Current range ≤0.60 A | Sample count ≥10 |
+|---|---:|---:|---:|---:|
+| 4.0 | 821 | 765 (93.2%) | 821 (100.0%) | 671 (81.7%) |
+| 4.1 | 3,739 | 3,659 (97.9%) | 3,739 (100.0%) | 3,217 (86.0%) |
+| 5.0 | 951 | 884 (93.0%) | 951 (100.0%) | 820 (86.2%) |
+| 5.1 | 2,790 | 2,739 (98.2%) | 2,790 (100.0%) | 2,465 (88.4%) |
+
+The duration distribution for the same 8,301 candidates was:
+
+| Pack | Total | <10 s | 10–<35 s | 35–85 s inclusive | >85 s |
+|---|---:|---:|---:|---:|---:|
+| 4.0 | 821 | 150 | 28 | 594 (72.4%) | 49 |
+| 4.1 | 3,739 | 526 | 144 | 2,809 (75.1%) | 260 |
+| 5.0 | 951 | 133 | 44 | 709 (74.6%) | 65 |
+| 5.1 | 2,790 | 328 | 98 | 2,157 (77.3%) | 207 |
+| **Total** | **8,301** | **1,137** | **314** | **6,269 (75.5%)** | **581** |
+
+Approximately three quarters of the candidate segments fall in the broad 35–85 s interval. However, 1,137 candidates are shorter than 10 s, and 581 exceed 85 s. These tails should be investigated, not automatically removed: they may reflect transitions, incomplete observations, gaps, genuine operating behaviour, or segmentation artefacts.
+
+The current-range check is partly coupled to the segmentation rule because the algorithm itself uses a current tolerance to define candidate boundaries. Therefore, the high proportion with range ≤0.30 A is not an independent validation of the algorithm. Likewise, the fact that every candidate is within 0.60 A is expected under this configuration and must not be presented as external confirmation. The ≥10-sample count is a separate descriptive check, but does not alone establish adequate sampling or a physically meaningful plateau.
+
+**Interpretation:** these checks support retaining the candidate segments for further investigation and feature-pipeline development with quality flags. They do not justify treating all 8,301 detections as verified load commands, nor choosing a final segmentation method. Boundary validation against raw traces and experimental protocol records remains necessary.
