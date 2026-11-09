@@ -649,3 +649,26 @@ The original rows within approximately five seconds of each detected gap were in
 Neither inspected interval contains a discharge mission; `mission_type` and `current_load` are therefore empty in these rows, as expected outside discharge missions. The gaps are only slightly above the selected 2 s threshold and are candidates for data-acquisition/timing review. The local excerpts do not establish why either interval is longer, nor prove that a measurement was lost. No rows have been removed or imputed.
 
 The evidence is limited to these two intervals in pack 0.0. It should not be generalized to other packs without running the same full-record audit and contextual inspection.
+
+
+### Initial discharge-measurement range audit: regular pack 0.0
+
+An initial descriptive-statistics pass was performed on pack 0.0 using regular-discharge mission rows (`mode=-1`, `mission_type=1`). The selected subset contained 77,340 rows.
+
+| Variable | Mean | Standard deviation | Minimum | 1st percentile | Median | 99th percentile | Maximum |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Current (A) | 16.611 | 1.093 | 0.460 | 16.286 | 16.720 | 16.952 | 19.391 |
+| Load voltage (V) | 6.260 | 0.544 | -0.027 | 5.060 | 6.283 | 7.148 | 8.703 |
+| Battery temperature (°C) | 66.446 | 19.200 | 22.148 | — | — | — | — |
+
+The 5th and 95th percentiles visible in the inspection output were 16.325 A and 16.929 A for current, and 5.513 V and 6.965 V for load voltage. The corresponding temperature percentiles were not available in the captured output and are not inferred here.
+
+Preliminary review points:
+- The current median (16.720 A) is above the dataset documentation's approximate nominal 16 A description for this regular-pack group. This is an observed difference, not evidence of a fault; the measured-current distribution must not be silently normalized to the nominal label.
+- The current minimum (0.460 A) is far below the central distribution and warrants contextual inspection.
+- The load-voltage minimum (-0.027 V) is unusual for a discharge measurement and warrants contextual inspection.
+- Battery temperature has a broad observed distribution (mean 66.446 °C, standard deviation 19.200 °C). High values must not be automatically removed or capped; investigate their time, current, voltage, and operating context first.
+
+A reusable exploratory script, `tools/audit_measurement_ranges.py`, has been added. It reports descriptive statistics and counts/examples for configurable threshold checks. Its default thresholds (current below 15 A, load voltage at or below 0 V, battery temperature at or above 90 °C) are screening choices only, not validated physical limits. Threshold hits are not automatically classified as outliers, sensor faults, or unsafe operation. The script writes summary and example CSVs under `outputs/`; generated outputs and raw archives remain uncommitted.
+
+This is an initial single-pack screening result. The temperature summary is incomplete in the captured terminal output, and threshold counts/contextual inspection have not yet been completed. No records have been excluded, altered, or imputed.
