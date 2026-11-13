@@ -685,3 +685,17 @@ A subsequent run of `tools/audit_measurement_ranges.py` on the 77,340 regular-di
 | Battery temperature at or above threshold | 90.0 °C | 8,185 | 10.59% |
 
 Percentages are calculated against the 77,340 selected discharge-mission rows and rounded to two decimal places. These are overlapping, independent threshold counts; they must not be added to estimate a unique number of affected records. The thresholds are exploratory screening criteria, not validated operating limits or fault labels. In particular, the 8,185 high-temperature records require temporal and operating-context review before any interpretation. No records have been removed or modified.
+
+
+#### Temporal episode analysis of high battery-temperature readings (pack 0.0)
+
+A follow-up local analysis grouped regular-discharge records with `temperature_battery >= 90 °C` into episodes, starting a new episode when the time gap between consecutive qualifying records exceeded 2.5 seconds.
+
+- Qualifying records: 8,185 of 77,340 regular-discharge rows (10.59%).
+- Detected episodes: 164.
+- Episode duration (calculated as last qualifying timestamp minus first qualifying timestamp): mean 70.08 s; standard deviation 25.36 s; median 72.50 s; interquartile range 54.30–88.23 s; minimum 2.87 s; maximum 123.74 s.
+- The longest detected episode contained 130 qualifying samples over 123.74 s, with a maximum battery temperature of 99.09 °C.
+- The highest observed temperature, 102.308 °C, occurred in a separate detected episode; it is not the maximum-temperature value of the longest episode.
+- The longest episodes generally coincided with measured mean discharge current around 16.3–16.7 A and minimum load voltage around 4.9 V in the displayed top-episode results.
+
+This temporal grouping indicates that the threshold-qualified readings are not all isolated single-sample spikes: the detected episodes commonly persist for roughly one to two minutes. Episode boundaries depend on the chosen 2.5 s gap rule and the 90 °C screening threshold. The result is descriptive and does not establish a thermal runaway event, cell failure, sensor fault, or causal relationship between current, voltage and temperature. The threshold and grouping rule require sensitivity checks, and the underlying traces and experiment context should be reviewed before assigning a physical interpretation. No records have been removed, altered, or imputed.
