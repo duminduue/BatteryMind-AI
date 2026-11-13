@@ -699,3 +699,16 @@ A follow-up local analysis grouped regular-discharge records with `temperature_b
 - The longest episodes generally coincided with measured mean discharge current around 16.3–16.7 A and minimum load voltage around 4.9 V in the displayed top-episode results.
 
 This temporal grouping indicates that the threshold-qualified readings are not all isolated single-sample spikes: the detected episodes commonly persist for roughly one to two minutes. Episode boundaries depend on the chosen 2.5 s gap rule and the 90 °C screening threshold. The result is descriptive and does not establish a thermal runaway event, cell failure, sensor fault, or causal relationship between current, voltage and temperature. The threshold and grouping rule require sensitivity checks, and the underlying traces and experiment context should be reviewed before assigning a physical interpretation. No records have been removed, altered, or imputed.
+
+
+#### Episode-level summary statistics for pack 0.0 high-temperature events
+
+A second summary was calculated from the 164 episodes in `outputs/pack_0_0_temperature_episodes.csv`. Each row represents one detected episode under the 90 °C threshold and 2.5 s gap rule described above.
+
+- Episode mean-temperature distribution: mean 92.76 °C, standard deviation 0.95 °C, median 92.86 °C, interquartile range 92.14–93.44 °C, minimum 90.04 °C and maximum 95.66 °C.
+- Distribution of each episode's maximum temperature: mean 95.57 °C, standard deviation 1.96 °C, median 95.82 °C, interquartile range 94.32–97.01 °C, minimum 90.05 °C and maximum 102.31 °C.
+- Across episodes, mean discharge current averaged 16.67 A (standard deviation 0.20 A; range 16.30–17.39 A).
+- Episode minimum load voltage averaged 4.95 V (standard deviation 0.14 V; range 4.90–6.02 V).
+- The highest-temperature episode began on 2022-07-23 12:31:00, lasted 105.10 s, had an episode mean temperature of 95.66 °C and maximum temperature of 102.31 °C, with mean current 16.67 A and minimum load voltage 4.92 V.
+
+These are descriptive statistics across detected episodes, not independent experimental replicates. Episodes come from the same pack and operating history, and the 90 °C threshold and 2.5 s segmentation rule influence the results. The co-occurrence of high temperatures with currents around 16.7 A and low load voltages around 4.9–5.0 V does not establish causation or identify a failure mechanism. The measurements require review against the dataset's sensor definitions, pack configuration, test protocol and original experimental context. No safety diagnosis or thermal-runaway classification is inferred.
