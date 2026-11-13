@@ -672,3 +672,16 @@ Preliminary review points:
 A reusable exploratory script, `tools/audit_measurement_ranges.py`, has been added. It reports descriptive statistics and counts/examples for configurable threshold checks. Its default thresholds (current below 15 A, load voltage at or below 0 V, battery temperature at or above 90 °C) are screening choices only, not validated physical limits. Threshold hits are not automatically classified as outliers, sensor faults, or unsafe operation. The script writes summary and example CSVs under `outputs/`; generated outputs and raw archives remain uncommitted.
 
 This is an initial single-pack screening result. The temperature summary is incomplete in the captured terminal output, and threshold counts/contextual inspection have not yet been completed. No records have been excluded, altered, or imputed.
+
+
+#### Pack 0.0 threshold-screening counts
+
+A subsequent run of `tools/audit_measurement_ranges.py` on the 77,340 regular-discharge rows for pack 0.0 produced these screening counts:
+
+| Screening condition | Threshold | Records | Share of discharge rows |
+|---|---:|---:|---:|
+| Current below threshold | 15.0 A | 339 | 0.44% |
+| Load voltage at or below threshold | 0.0 V | 178 | 0.23% |
+| Battery temperature at or above threshold | 90.0 °C | 8,185 | 10.59% |
+
+Percentages are calculated against the 77,340 selected discharge-mission rows and rounded to two decimal places. These are overlapping, independent threshold counts; they must not be added to estimate a unique number of affected records. The thresholds are exploratory screening criteria, not validated operating limits or fault labels. In particular, the 8,185 high-temperature records require temporal and operating-context review before any interpretation. No records have been removed or modified.
