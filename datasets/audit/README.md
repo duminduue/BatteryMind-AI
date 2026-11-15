@@ -774,11 +774,11 @@ The generalized `tools/audit_temperature_threshold_sensitivity.py` script was ru
 - Regular-discharge rows inspected: 66,946.
 - Episode gap rule: greater than 2.5 seconds.
 
-| Temperature threshold | Qualifying records | Detected episodes | Mean episode duration (s) | Median episode maximum temperature (°C) | Spearman rho: max temperature vs duration |
-|---:|---:|---:|---:|---:|---:|
-| 85 °C | 10,313 | 138 | 72.50 | 92.88 | 0.629 |
-| 90 °C | 3,436 | 135 | 24.07 | 92.89 | 0.832 |
-| 95 °C | 36 | 11 | 2.22 | 95.40 | 0.879 |
+| Temperature threshold | Qualifying records | Detected episodes | Mean episode duration (s) | Median episode duration (s) | Median episode maximum temperature (°C) | Spearman rho: max temperature vs duration |
+|---:|---:|---:|---:|---:|---:|---:|
+| 85 °C | 10,313 | 138 | 72.50 | 74.179 | 92.88 | 0.629 |
+| 90 °C | 3,436 | 135 | 24.07 | 24.764 | 92.89 | 0.832 |
+| 95 °C | 36 | 11 | 2.22 | 1.923 | 95.40 | 0.879 |
 
 The number of qualifying records decreases sharply as the threshold rises. Episode counts are not monotonic (138, 135, then 11). Mean episode duration also falls substantially, particularly at 95 °C, where only 36 records form 11 episodes. The positive episode-level Spearman association between maximum temperature and duration is present at all three thresholds (rho 0.629–0.879), but the 95 °C result is based on only 11 episodes and should be treated cautiously.
 
