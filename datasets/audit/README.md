@@ -765,3 +765,36 @@ The exploratory script `tools/audit_temperature_threshold_sensitivity.py` was ru
 The number of qualifying records falls as the screening threshold rises. The detected episode count is not monotonic: it increases slightly from 160 at 85 °C to 164 at 90 °C, then falls to 108 at 95 °C. Mean episode duration decreases across the three thresholds. The episode-level Spearman association between maximum temperature and duration is positive at all three thresholds (rho 0.818–0.895).
 
 These results demonstrate that the episode statistics depend on the selected temperature threshold. They are exploratory, pack-specific summaries, not independent experimental replicates. The threshold and 2.5-second gap rule both affect episode membership and boundaries. The correlations do not establish causation, a failure mechanism, thermal runaway, or a validated safety limit. No observations were removed, altered or imputed. The 85/90/95 °C values are sensitivity-analysis screening choices only.
+
+
+#### Temperature-threshold sensitivity analysis for pack 1.0
+
+The generalized `tools/audit_temperature_threshold_sensitivity.py` script was run on regular-discharge rows from pack 1.0 (`mode=-1`, `mission_type=1`, non-empty current measurements), using the same 2.5-second episode gap rule and 85/90/95 °C screening thresholds as pack 0.0.
+
+- Regular-discharge rows inspected: 66,946.
+- Episode gap rule: greater than 2.5 seconds.
+
+| Temperature threshold | Qualifying records | Detected episodes | Mean episode duration (s) | Median episode maximum temperature (°C) | Spearman rho: max temperature vs duration |
+|---:|---:|---:|---:|---:|---:|
+| 85 °C | 10,313 | 138 | 72.50 | 92.88 | 0.629 |
+| 90 °C | 3,436 | 135 | 24.07 | 92.89 | 0.832 |
+| 95 °C | 36 | 11 | 2.22 | 95.40 | 0.879 |
+
+The number of qualifying records decreases sharply as the threshold rises. Episode counts are not monotonic (138, 135, then 11). Mean episode duration also falls substantially, particularly at 95 °C, where only 36 records form 11 episodes. The positive episode-level Spearman association between maximum temperature and duration is present at all three thresholds (rho 0.629–0.879), but the 95 °C result is based on only 11 episodes and should be treated cautiously.
+
+#### Preliminary comparison: packs 0.0 and 1.0
+
+Both packs were processed with the same threshold values and 2.5-second episode-gap rule. The counts below are pack-specific observations, not independent battery-level replicates.
+
+| Pack | Regular-discharge rows | Threshold (°C) | Qualifying records | Episodes | Mean episode duration (s) | Median episode maximum (°C) | Spearman rho |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 0.0 | 77,340 | 85 | 15,861 | 160 | 96.68 | 95.97 | 0.818 |
+| 0.0 | 77,340 | 90 | 8,185 | 164 | 48.24 | 95.82 | 0.878 |
+| 0.0 | 77,340 | 95 | 1,550 | 108 | 13.19 | 96.54 | 0.895 |
+| 1.0 | 66,946 | 85 | 10,313 | 138 | 72.50 | 92.88 | 0.629 |
+| 1.0 | 66,946 | 90 | 3,436 | 135 | 24.07 | 92.89 | 0.832 |
+| 1.0 | 66,946 | 95 | 36 | 11 | 2.22 | 95.40 | 0.879 |
+
+At each matched threshold, pack 1.0 has fewer threshold-qualified records and shorter mean detected episodes than pack 0.0. At 95 °C, pack 1.0 has only 36 qualifying records across 11 episodes, so its episode-level statistics are especially sensitive to individual observations. This is a preliminary descriptive difference, not evidence that one pack is healthier, safer, or degrades faster. The packs may differ in operating history and other conditions, and the two-pack comparison does not establish population-level behaviour or causality.
+
+The threshold values (85/90/95 °C) and 2.5-second gap rule are exploratory analysis settings, not validated safety limits or fault labels. Episode membership and duration depend on these settings. No records were removed, modified or imputed, and no thermal-runaway or failure diagnosis is inferred.
