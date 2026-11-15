@@ -798,3 +798,18 @@ Both packs were processed with the same threshold values and 2.5-second episode-
 At each matched threshold, pack 1.0 has fewer threshold-qualified records and shorter mean detected episodes than pack 0.0. At 95 °C, pack 1.0 has only 36 qualifying records across 11 episodes, so its episode-level statistics are especially sensitive to individual observations. This is a preliminary descriptive difference, not evidence that one pack is healthier, safer, or degrades faster. The packs may differ in operating history and other conditions, and the two-pack comparison does not establish population-level behaviour or causality.
 
 The threshold values (85/90/95 °C) and 2.5-second gap rule are exploratory analysis settings, not validated safety limits or fault labels. Episode membership and duration depend on these settings. No records were removed, modified or imputed, and no thermal-runaway or failure diagnosis is inferred.
+
+
+#### Temperature-threshold screening for pack 0.1
+
+The exploratory threshold-sensitivity script was run on pack 0.1 in `regular_alt_batteries/battery01.csv`, filtering to regular-discharge rows (`mode=-1`, `mission_type=1`, and non-empty `current_load`).
+
+- Regular-discharge rows inspected: 626,126.
+- Battery-temperature mean: 45.956 °C; standard deviation: 10.519 °C.
+- Minimum: 21.755 °C; median: 46.904 °C; maximum: 72.566 °C.
+- Qualifying records at or above 85 °C: 0.
+- Qualifying records at or above 90 °C: 0.
+- Qualifying records at or above 95 °C: 0.
+- The threshold-sensitivity script consequently detected zero episodes at all three thresholds.
+
+This confirms that the zero-episode output is consistent with the observed temperature range in the filtered rows; it is not evidence of missing data in this check. It does not establish that pack 0.1 is safer or healthier than other packs. Thresholds are exploratory screening settings, not validated safety limits, and cross-pack interpretation requires consideration of operating conditions and histories.
