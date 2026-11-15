@@ -712,3 +712,38 @@ A second summary was calculated from the 164 episodes in `outputs/pack_0_0_tempe
 - The highest-temperature episode began on 2022-07-23 12:31:00, lasted 105.10 s, had an episode mean temperature of 95.66 °C and maximum temperature of 102.31 °C, with mean current 16.67 A and minimum load voltage 4.92 V.
 
 These are descriptive statistics across detected episodes, not independent experimental replicates. Episodes come from the same pack and operating history, and the 90 °C threshold and 2.5 s segmentation rule influence the results. The co-occurrence of high temperatures with currents around 16.7 A and low load voltages around 4.9–5.0 V does not establish causation or identify a failure mechanism. The measurements require review against the dataset's sensor definitions, pack configuration, test protocol and original experimental context. No safety diagnosis or thermal-runaway classification is inferred.
+
+
+#### Duration–temperature relationship in pack 0.0 high-temperature episodes
+
+An episode-level exploratory analysis was performed on the 164 detected high-temperature episodes described above. Spearman rank correlations were calculated across episode summaries:
+
+| Episode-level variables | Spearman correlation |
+|---|---:|
+| Mean temperature vs mean discharge current | -0.230 |
+| Maximum temperature vs mean discharge current | -0.239 |
+| Mean temperature vs minimum load voltage | -0.126 |
+| Maximum temperature vs minimum load voltage | -0.124 |
+| Maximum temperature vs episode duration | **0.878** |
+
+The strongest observed monotonic association was between episode maximum temperature and episode duration (Spearman rho = 0.878). The other listed associations were weak and negative in this episode-level sample.
+
+As a descriptive follow-up, the 164 episodes were divided into four duration quartiles (41 episodes per group). The group summaries were:
+
+| Duration group | Mean episode duration (s) | Mean of episode mean temperatures (°C) | Mean of episode maximum temperatures (°C) | Highest episode maximum (°C) |
+|---|---:|---:|---:|---:|
+| Q1 Short | 24.64 | 91.59 | 93.11 | 95.40 |
+| Q2 | 43.26 | 92.64 | 95.26 | 96.78 |
+| Q3 | 53.95 | 93.17 | 96.37 | 98.18 |
+| Q4 Long | 71.10 | 93.66 | 97.55 | 102.31 |
+
+The mean episode maximum temperature rises across the four duration groups, from 93.11 °C in Q1 to 97.55 °C in Q4. This pattern is consistent with the positive Spearman association and supports a descriptive relationship between longer threshold-qualified episodes and higher episode maxima in this pack.
+
+Interpretation limits:
+- These are 164 episodes from one pack, not 164 independent batteries or experimental replicates.
+- Episodes were defined using the 90 °C screening threshold and 2.5 s gap rule; the correlation and quartile summaries may depend on these choices.
+- The analysis is observational and episode-level. It does not establish that longer duration causes higher temperature, nor rule out confounding by elapsed life, operating state, ambient conditions, sensor behaviour or other variables.
+- Current and voltage correlations are weak in this summary; do not claim that current or voltage alone explains the temperature pattern.
+- The 90 °C value is an exploratory screening threshold, not a validated safety limit or fault label. The 102.308 °C observation remains a contextual review item, not a confirmed failure or thermal-runaway event.
+
+The corrected elapsed-time scatter plot is the preferred visual summary for this analysis because it displays episode mean and maximum temperatures as separate observations without connecting distinct episodes with continuous lines. The graph file remains a local generated output until it is intentionally added to the repository.
