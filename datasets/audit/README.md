@@ -747,3 +747,21 @@ Interpretation limits:
 - The 90 °C value is an exploratory screening threshold, not a validated safety limit or fault label. The 102.308 °C observation remains a contextual review item, not a confirmed failure or thermal-runaway event.
 
 The corrected elapsed-time scatter plot is the preferred visual summary for this analysis because it displays episode mean and maximum temperatures as separate observations without connecting distinct episodes with continuous lines. The graph file remains a local generated output until it is intentionally added to the repository.
+
+
+#### Temperature-threshold sensitivity analysis for pack 0.0
+
+The exploratory script `tools/audit_temperature_threshold_sensitivity.py` was run on regular-discharge rows from pack 0.0 (`mode=-1`, `mission_type=1`, non-empty `current_load`). It evaluated three screening thresholds and grouped qualifying observations into episodes, starting a new episode when the time gap exceeded 2.5 seconds.
+
+- Regular-discharge rows inspected: 77,340.
+- Episode gap rule: greater than 2.5 seconds.
+
+| Temperature threshold | Qualifying records | Detected episodes | Mean episode duration (s) | Median episode maximum temperature (°C) | Spearman rho: max temperature vs duration |
+|---:|---:|---:|---:|---:|---:|
+| 85 °C | 15,861 | 160 | 96.68 | 95.97 | 0.818 |
+| 90 °C | 8,185 | 164 | 48.24 | 95.82 | 0.878 |
+| 95 °C | 1,550 | 108 | 13.19 | 96.54 | 0.895 |
+
+The number of qualifying records falls as the screening threshold rises. The detected episode count is not monotonic: it increases slightly from 160 at 85 °C to 164 at 90 °C, then falls to 108 at 95 °C. Mean episode duration decreases across the three thresholds. The episode-level Spearman association between maximum temperature and duration is positive at all three thresholds (rho 0.818–0.895).
+
+These results demonstrate that the episode statistics depend on the selected temperature threshold. They are exploratory, pack-specific summaries, not independent experimental replicates. The threshold and 2.5-second gap rule both affect episode membership and boundaries. The correlations do not establish causation, a failure mechanism, thermal runaway, or a validated safety limit. No observations were removed, altered or imputed. The 85/90/95 °C values are sensitivity-analysis screening choices only.
