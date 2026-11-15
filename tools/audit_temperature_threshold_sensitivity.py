@@ -51,6 +51,8 @@ def main():
                     help="CSV member path inside the ZIP archive")
     ap.add_argument("--pack-label", default="Pack 0.0")
     ap.add_argument("--output", default="outputs/pack_0_0_temperature_threshold_sensitivity.csv")
+    ap.add_argument("--episode-output", default=None,
+                    help="Optional CSV path for individual threshold episodes")
     args = ap.parse_args()
 
     member = args.member
@@ -78,6 +80,7 @@ def main():
     print()
     print("Threshold | Records | Episodes | Mean duration(s) | Median max temp(C) | Spearman(max temp, duration)")
     output = []
+    episode_output = []
 
     for threshold in (85.0, 90.0, 95.0):
         selected = [r for r in rows if r[1] >= threshold]
@@ -96,9 +99,27 @@ def main():
             episodes.append(current_episode)
 
         durations, maxima = [], []
-        for ep in episodes:
-            durations.append(ep[-1][0] - ep[0][0])
-            maxima.append(max(r[1] for r in ep))
+        for episode_id, ep in enumerate(episodes, start=1):
+            duration = ep[-1][0] - ep[0][0]
+            maximum = max(r[1] for r in ep)
+            durations.append(duration)
+            maxima.append(maximum)
+            currents = [r[2] for r in ep if r[2] is not None]
+            voltages = [r[3] for r in ep if r[3] is not None]
+            episode_output.append({
+                "pack_label": args.pack_label,
+                "threshold_C": threshold,
+                "episode_id": episode_id,
+                "start_time_s": ep[0][0],
+                "end_time_s": ep[-1][0],
+                "sample_count": len(ep),
+                "duration_s": duration,
+                "mean_temperature_C": statistics.mean(r[1] for r in ep),
+                "max_temperature_C": maximum,
+                "mean_current_A": statistics.mean(currents) if currents else float("nan"),
+                "minimum_voltage_V": min(voltages) if voltages else float("nan"),
+                "gap_rule_s": args.gap_seconds,
+            })
 
         mean_duration = statistics.mean(durations) if durations else float("nan")
         median_max = statistics.median(maxima) if maxima else float("nan")
@@ -123,7 +144,22 @@ def main():
         writer = csv.DictWriter(f, fieldnames=list(output[0]))
         writer.writeheader()
         writer.writerows(output)
-    print(f"\nSaved: {out}")
+    print(f"\nSaved summary: {out}")
+
+    if args.episode_output:
+        episode_path = Path(args.episode_output)
+        episode_path.parent.mkdir(parents=True, exist_ok=True)
+        fields = list(episode_output[0]) if episode_output else [
+            "pack_label", "threshold_C", "episode_id", "start_time_s",
+            "end_time_s", "sample_count", "duration_s",
+            "mean_temperature_C", "max_temperature_C", "mean_current_A",
+            "minimum_voltage_V", "gap_rule_s",
+        ]
+        with episode_path.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=fields)
+            writer.writeheader()
+            writer.writerows(episode_output)
+        print(f"Saved episode details: {episode_path} ({len(episode_output):,} rows)")
 
 
 if __name__ == "__main__":
