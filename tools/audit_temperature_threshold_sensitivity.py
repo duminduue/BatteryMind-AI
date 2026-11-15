@@ -47,10 +47,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("archive", help="Path to battery_alt_dataset.zip")
     ap.add_argument("--gap-seconds", type=float, default=2.5)
+    ap.add_argument("--member", default="battery_alt_dataset/regular_alt_batteries/battery00.csv",
+                    help="CSV member path inside the ZIP archive")
+    ap.add_argument("--pack-label", default="Pack 0.0")
     ap.add_argument("--output", default="outputs/pack_0_0_temperature_threshold_sensitivity.csv")
     args = ap.parse_args()
 
-    member = "battery_alt_dataset/regular_alt_batteries/battery00.csv"
+    member = args.member
     with zipfile.ZipFile(args.archive) as zf:
         with zf.open(member) as raw:
             reader = csv.DictReader(io.TextIOWrapper(raw, encoding="utf-8-sig"))
@@ -70,7 +73,7 @@ def main():
                 ))
 
     rows.sort(key=lambda r: r[0])
-    print(f"Pack 0.0 qualifying regular-discharge rows: {len(rows):,}")
+    print(f"{args.pack_label} qualifying regular-discharge rows: {len(rows):,}")
     print(f"Episode gap rule: > {args.gap_seconds:g} seconds")
     print()
     print("Threshold | Records | Episodes | Mean duration(s) | Median max temp(C) | Spearman(max temp, duration)")
